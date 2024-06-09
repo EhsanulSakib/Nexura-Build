@@ -25,33 +25,15 @@ const Navbar = () => {
     }
 
     const links = <>
-        <ul className={`lg:flex flex-row gap-2 duration-300 top-16 md:top-[60px] absolute ${darkMode ? 'bg-gray-800' : 'bg-slate-100'} lg:static ${open ? 'left-0' : '-left-60'} p-10 lg:p-0 shadow-lg lg:shadow-none no-underline lg:gap-6 text-base lg:text-xl z-50 font-bold`}>
-            <li className="pb-1 lg:pb-0"><NavLink className={'focus:border-b-2 '} to='/'>Home</NavLink></li>
-            <li className="pb-1 lg:pb-0"><NavLink className={'focus:border-b-2 '} to='/'>Apartments</NavLink></li>
-            {
-                user ?
-                    <li className="pb-1 lg:pb-0"><NavLink className={'focus:border-b-2'} to='/all-books'>All Books</NavLink></li>
-                    :
-                    ""
-            }
-            {
-                user ?
-                    <li className="pb-1 lg:pb-0"><NavLink className={'focus:border-b-2'} to='/add-book'>Add Book</NavLink></li>
-                    :
-                    ""
-            }
-            {
-                user ?
-                    <li className="pb-1 lg:pb-0"><NavLink className={' focus:border-b-2'} to='/borrowed'>Borrowed Books</NavLink></li>
-                    :
-                    ""
-            }
+        <ul className={`xl:flex flex-row gap-2 duration-300 top-16 md:top-[3rem] lg:top-16 absolute ${darkMode ? 'bg-gray-800' : 'bg-slate-100'} xl:static ${open ? 'left-0' : '-left-60'} p-10 xl:p-0 shadow-lg xl:shadow-none no-underline xl:gap-6 text-base xl:text-xl z-50 font-bold`}>
+            <li className="pb-1 xl:pb-0"><NavLink className={'focus:border-b-2 '} to='/'>Home</NavLink></li>
+            <li className="pb-1 xl:pb-0"><NavLink className={'focus:border-b-2 '} to='/'>Apartments</NavLink></li>
 
             {
                 user ?
-                    <li className="mt-8 lg:mt-0 rounded-md lg:hidden focus:border-b-2" onClick={handleSignOut}>Sign Out</li>
+                    <li className="mt-8 xl:mt-0 rounded-md xl:hidden focus:border-b-2" onClick={handleSignOut}>Sign Out</li>
                     :
-                    <li className="mt-8 lg:mt-0 rounded-md lg:hidden">
+                    <li className="mt-8 xl:mt-0 rounded-md xl:hidden">
                         <NavLink to='/login' className={'focus:border-b-2 '}>Login</NavLink>
                     </li>
             }
@@ -59,7 +41,7 @@ const Navbar = () => {
                 user ?
                     ""
                     :
-                    <li className="lg:hidden"><NavLink className={'focus:border-b-2 '} to='/register'>Register</NavLink></li>
+                    <li className="xl:hidden"><NavLink className={'focus:border-b-2 '} to='/register'>Register</NavLink></li>
             }
 
 
@@ -68,27 +50,27 @@ const Navbar = () => {
 
 
     return (
-        <nav className="flex items-center px-2 lg:px-4 py-1 lg:py-2 justify-between m-auto text-xl font-medium ">
-            <div className="flex items-center lg:hidden">
-                <div className="lg:hidden" onClick={() => setOpen(!open)}>
+        <nav className="flex items-center px-2 xl:px-4 py-1 xl:py-2 justify-between m-auto text-xl font-medium  ">
+            <div className="flex items-center xl:hidden">
+                <div className="xl:hidden" onClick={() => setOpen(!open)}>
                     {
                         open == true ? <IoMdClose className="text-2xl " /> : <RiMenu2Line className="text-2xl " />
                     }
                 </div>
 
-                <div className="logo flex text-base lg:hidden items-center">
+                <div className="logo flex text-base xl:hidden items-center">
                     <img src={logo} alt="" className="w-12 pl-2" />
                     <h2 className="text-blue-400 text-xl font-extrabold">Nexura Building</h2>
                 </div>
             </div>
 
-            <div className="logo hidden lg:flex items-center ">
+            <div className="logo hidden xl:flex items-center ">
                 <img src={logo} alt="" className="w-16 pl-2" />
                 <h2 className="text-blue-400 text-3xl font-extrabold">Nexura Building</h2>
             </div>
 
 
-            <div className="flex flex-col lg:gap-8 lg:flex-row items-center">
+            <div className="flex flex-col xl:gap-8 xl:flex-row items-center">
 
 
                 <div>
@@ -114,11 +96,11 @@ const Navbar = () => {
                         {
                             user ?
                                 <div className="flex items-center gap-2">
-                                    <div className={`flex gap-2 items-center ${darkMode ? 'bg-gray-600' : 'bg-slate-300'} py-1 pl-2 lg:px-2 rounded-full`}>
+                                    <div className={`flex gap-2 items-center ${darkMode ? 'bg-gray-600' : 'bg-slate-300'} py-1 pl-2 xl:px-2 rounded-full`}>
                                         <h2 className="font-bold text-xs lg:text-base 2xl:text-lg">{user.displayName}</h2>
                                         <img src={user.photoURL} alt="" className="w-8 lg:w-12 h-8 lg:h-12 object-cover object-top rounded-full " />
                                         <div>
-                                            <button className={`btn btn-active  hidden btn-circle text-2xl font-extrabold lg:flex ${darkMode ? 'bg-gray-300 text-black' : 'bg-slate-700 text-white'}`} onClick={handleSignOut}><MdOutlineLogout /></button>
+                                            <button className={`btn btn-active  hidden btn-circle text-2xl font-extrabold xl:flex ${darkMode ? 'bg-gray-300 text-black' : 'bg-slate-700 text-white'}`} onClick={handleSignOut}><MdOutlineLogout /></button>
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +111,7 @@ const Navbar = () => {
                         }
                     </div>
 
-                    <div className="hidden lg:flex">
+                    <div className="hidden xl:flex">
                         {
                             user ?
                                 ""
@@ -140,7 +122,7 @@ const Navbar = () => {
                         }
                     </div >
 
-                    <div className="hidden lg:flex">
+                    <div className="hidden xl:flex">
                         {
                             user ?
                                 ""

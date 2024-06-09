@@ -20,14 +20,14 @@ const Banner = () => {
                     autoplay={{ delay: 2000 }}
                 >
                     <SwiperSlide>
-                        <div style={{ backgroundImage: `url("https://i.ibb.co/ydxkQ5r/48219.jpg")` }} className='flex items-center justify-center z-1 w-full h-60 md:h-96 lg:h-[500px] xl:h-[650px] 2xl:h-[1000px] bg-cover bg-bottom relative'>
+                        <div style={{ backgroundImage: `url("https://i.ibb.co/ydxkQ5r/48219.jpg")` }} className='flex items-center justify-center z-1 w-full h-60 md:h-96 lg:h-[650px] bg-cover bg-center relative'>
                             <div className='absolute w-full h-full bg-black opacity-50'>
                             </div>
                         </div>
                     </SwiperSlide>
 
                     <SwiperSlide>
-                        <div style={{ backgroundImage: `url("https://i.ibb.co/5Y0HbY3/12323.jpg")` }} className='flex items-center justify-center z-1 w-full h-60 md:h-96 lg:h-[500px] xl:h-[650px] 2xl:h-[1000px] bg-cover bg-center relative'>
+                        <div style={{ backgroundImage: `url("https://i.ibb.co/5Y0HbY3/12323.jpg")` }} className='flex items-center justify-center z-1 w-full h-60 md:h-96 lg:h-[650px] bg-cover bg-center relative'>
                             <div className='absolute w-full h-full bg-black opacity-50'>
                             </div>
                         </div>
@@ -35,7 +35,7 @@ const Banner = () => {
 
 
                     <SwiperSlide>
-                        <div style={{ backgroundImage: `url("https://i.ibb.co/MN5LHTJ/2150164706.jpg")` }} className='flex items-center justify-center z-1 w-full h-60 md:h-96 lg:h-[500px] xl:h-[650px] 2xl:h-[1000px] bg-cover bg-top relative'>
+                        <div style={{ backgroundImage: `url("https://i.ibb.co/MN5LHTJ/2150164706.jpg")` }} className='flex items-center justify-center z-1 w-full h-60 md:h-96 lg:h-[650px] bg-cover bg-center relative'>
                             <div className='absolute w-full h-full bg-black opacity-50'>
                             </div>
 
