@@ -7,6 +7,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import google from '../../../public/google.png'
 import github from '../../../public/github.png';
 import { AuthContext } from "../../provider/AuthProvider";
+import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 
 const Login = () => {
     const { signIn, handleGoogleSignIn, handleGitHubSignIn } = useContext(AuthContext)
@@ -15,6 +16,7 @@ const Login = () => {
     const notifyError = errorName => toast.error(errorName);
     const location = useLocation()
     const navigate = useNavigate()
+    const axiosPublic = useAxiosPublic()
     const [show, setShow] = useState(false)
 
     const onSubmit = (data) => {
@@ -34,17 +36,32 @@ const Login = () => {
 
     const handleGoogleLogin = () => {
         handleGoogleSignIn()
-            .then(() => {
-                navigate(location?.state ? location.state : '/')
-                notify()
+            .then(result => {
+                const userInfo = {
+                    email: result.user?.email,
+                    name: result.user?.displayName,
+                    role: "user"
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        navigate(location?.state ? location.state : '/')
+                        notify()
+                    })
             })
     }
 
     const handleGithubLogin = () => {
         handleGitHubSignIn()
-            .then(() => {
-                navigate(location?.state ? location.state : '/')
-                notify()
+            .then(result => {
+                const userInfo = {
+                    email: result.user?.email,
+                    name: result.user?.displayName
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        navigate(location?.state ? location.state : '/')
+                        notify()
+                    })
             })
     }
 

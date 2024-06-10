@@ -7,12 +7,14 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Swal from "sweetalert2";
 import { AuthContext } from "../../provider/AuthProvider";
+import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 
 const Register = () => {
     const { setUser, createUser } = useContext(AuthContext);
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
     const [show, setShow] = useState(false);
     const navigate = useNavigate()
+    const axiosPublic = useAxiosPublic()
     const notifyError = errorName => toast.error(errorName);
     const notifySuccess = () => toast.success('User Registered Successfully');
 
@@ -42,18 +44,31 @@ const Register = () => {
                 updateProfile(result.user, {
                     displayName: name, photoURL: photo
                 })
-                    .then(result => {
-                        Swal.fire({
-                            title: 'Success!',
-                            text: 'User Added Successfully!',
-                            icon: 'success',
-                            confirmButtonText: 'Ok'
-                        })
-                        navigate('/')
+                    .then(() => {
+                        const userInfo = {
+                            name: data.name,
+                            email: data.email,
+                            role: "user"
+                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log('user added to the database')
+                                    reset();
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'User created successfully.',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    navigate('/');
+                                }
+                            })
+
+
                     })
-                    .catch()
+                    .catch(error => notifyError(error.message.split('(').pop().split(')')[0].split('/')[1]))
             })
-            .catch(error => notifyError(error.message.split('(').pop().split(')')[0].split('/')[1]))
     }
 
 

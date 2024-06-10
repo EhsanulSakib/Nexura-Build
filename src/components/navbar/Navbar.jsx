@@ -97,7 +97,7 @@ const Navbar = () => {
                                     <div tabIndex={0} role="button" className=""><img src={user.photoURL} alt="" className="w-8 lg:w-12 h-8 lg:h-12 object-cover object-top rounded-full" /></div>
                                     <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 mt-1 rounded-md w-44 border border-gray-400 bg-slate-100 shadow-lg">
                                         <h2 className="font-bold text-center">{user.displayName}</h2>
-                                        <Link><button className="btn border-none bg-blue-600 hover:bg-blue-500 btn-sm w-full mt-2 text-white rounded-sm">
+                                        <Link to='/dashboard'><button className="btn border-none bg-blue-600 hover:bg-blue-500 btn-sm w-full mt-2 text-white rounded-sm">
                                             Dashboard
                                         </button></Link>
                                         <Link><button className="btn border-none bg-red-800 hover:bg-red-600 btn-sm w-full my-1 text-white rounded-sm" onClick={handleSignOut}>

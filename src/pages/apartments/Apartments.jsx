@@ -41,7 +41,7 @@ const Apartments = () => {
 
             <div className='pagination flex items-center flex-wrap justify-center mb-4 md:mb-8 lg:mb-12 gap-2'>
                 {
-                    pages?.map(page => <button className={currentPage === page && 'selected'} key={page} onClick={() => setCurrentPage(page)}>{page}</button>)
+                    pages?.map(page => <button className={currentPage === page && 'selected'} key={page} onClick={() => setCurrentPage(page)}>{page + 1}</button>)
                 }
             </div>
         </div>
