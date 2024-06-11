@@ -11,6 +11,7 @@ import Profile from "../pages/dashboard/profile/Profile";
 import AdminRoute from "./AdminRoute";
 import Announcements from "../pages/dashboard/announcements/Announcements";
 import AdminDashboard from "../pages/dashboard/adminDashboard/AdminDashboard";
+import ManageMembers from "../components/dashboard/admin/manageMembers/ManageMembers";
 
 const router = createBrowserRouter([
     {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
             {
                 path: '/admin-dashboard/',
                 element: <AdminRoute><Profile></Profile></AdminRoute>
+            },
+            {
+                path: '/admin-dashboard/manage-members',
+                element: <AdminRoute><ManageMembers></ManageMembers></AdminRoute>
             }
         ]
     }
