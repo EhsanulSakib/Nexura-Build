@@ -19,7 +19,7 @@ const ApartmentCard = ({ apartment }) => {
                 >
                     <SwiperSlide>
                         <div className='flex items-center justify-center z-1 w-full h-96 bg-cover bg-center relative'>
-                            <div className='absolute w-full h-96 bg-black opacity-60'>
+                            <div className='absolute w-full h-96 bg-black opacity-20'>
                             </div>
                             <img src={apartment.apartment_images[0]} alt="" className='w-full h-96 object-cover object-center' />
                         </div>
@@ -27,7 +27,7 @@ const ApartmentCard = ({ apartment }) => {
 
                     <SwiperSlide>
                         <div className='flex items-center justify-center z-1 w-full h-96  bg-cover bg-center relative'>
-                            <div className='absolute w-full h-96 bg-black opacity-60'>
+                            <div className='absolute w-full h-96 bg-black opacity-20'>
                             </div>
                             <img src={apartment.apartment_images[1]} alt="" className='w-full h-96 object-cover object-center' />
                         </div>
@@ -36,7 +36,7 @@ const ApartmentCard = ({ apartment }) => {
 
                     <SwiperSlide>
                         <div className='flex items-center justify-center z-1 w-full h-96 bg-cover bg-top relative'>
-                            <div className='absolute w-full h-96 bg-black opacity-60'>
+                            <div className='absolute w-full h-96 bg-black opacity-20'>
                             </div>
                             <img src={apartment.apartment_images[2]} alt="" className='w-full h-96 object-cover object-center' />
                         </div>
@@ -46,7 +46,7 @@ const ApartmentCard = ({ apartment }) => {
 
                     <SwiperSlide>
                         <div className='flex items-center justify-center z-1 w-full h-96  bg-cover bg-center relative'>
-                            <div className='absolute w-full h-96 bg-black opacity-60'>
+                            <div className='absolute w-full h-96 bg-black opacity-20'>
                             </div>
                             <img src={apartment.apartment_images[3]} alt="" className='w-full h-96 object-cover object-center' />
                         </div>
@@ -54,7 +54,7 @@ const ApartmentCard = ({ apartment }) => {
 
                     <SwiperSlide>
                         <div className='flex items-center justify-center z-1 w-full h-96  bg-cover bg-center relative'>
-                            <div className='absolute w-full h-96 bg-black opacity-60'>
+                            <div className='absolute w-full h-96 bg-black opacity-20'>
                             </div>
                             <img src={apartment.apartment_images[4]} alt="" className='w-full h-96 object-cover object-center' />
                         </div>

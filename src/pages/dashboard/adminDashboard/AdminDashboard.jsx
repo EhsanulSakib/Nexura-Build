@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
-import { AuthContext } from '../../provider/AuthProvider';
 import { Outlet } from 'react-router-dom';
-import Drawer from '../../components/dashboard/drawer/Drawer';
+import Drawer from '../../../components/dashboard/drawer/Drawer';
+import { AuthContext } from '../../../provider/AuthProvider';
 
-const Dashboard = () => {
+
+const AdminDashboard = () => {
     const { darkMode } = useContext(AuthContext)
     return (
         <div className={`${darkMode ? 'bg-gray-800 text-slate-100' : 'bg-slate-100 text-gray-800'} font-raleway`}>
@@ -11,7 +12,7 @@ const Dashboard = () => {
                 <div className='flex w-full justify-end'>
                     <Drawer></Drawer>
                     <div className='w-full lg:w-2/3 2xl:w-full'>
-                        <h2 className='flex-1 text-center mt-3 text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold'>Dashboard</h2>
+                        <h2 className='flex-1 text-center mt-3 text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold'>Admin Dashboard</h2>
                         <Outlet></Outlet>
                     </div>
                 </div>
@@ -20,4 +21,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default AdminDashboard;
