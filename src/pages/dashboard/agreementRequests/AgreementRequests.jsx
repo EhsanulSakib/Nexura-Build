@@ -19,6 +19,7 @@ const AgreementRequests = () => {
                         <tr>
                             <th>User</th>
                             <th>Apartment Info</th>
+                            <th>Status</th>
                             <th>Accept</th>
                             <th>Reject</th>
                         </tr>

@@ -7,13 +7,13 @@ const Drawer = () => {
     const { darkMode, setDarkMode, user, isAdmin } = useContext(AuthContext)
     return (
         <div className={`w-1/3 fixed top-0 left-0 z-50`}>
-            <div className={`drawer lg:drawer-open `}>
+            <div className={`drawer lg:drawer-open`}>
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col items-start justify-start">
                     <label htmlFor="my-drawer-2" className="btn drawer-button lg:hidden bg-transparent border-none p-1 text-xl rounded-none hover:bg-transparent shadow-none "> <RiArchiveDrawerFill /></label>
 
                 </div>
-                <div className={`drawer-side z-10 top-16`}>
+                <div className={`drawer-side z-10`}>
                     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay bg-black"></label>
                     <ul className={`menu p-4 w-72 min-h-full text-lg lg:text-xl gap-4 bg-gradient-to-r text-white from-blue-800 to-blue-400 z-10`}>
                         <div className="logo flex text-base items-center">

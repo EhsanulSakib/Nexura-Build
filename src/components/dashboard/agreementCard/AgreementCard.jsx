@@ -5,14 +5,27 @@ import useAxiosPublic from '../../../hooks/useAxiosPublic/useAxiosPublic';
 const AgreementCard = ({ agreement, setAgreements }) => {
     const axiosPublic = useAxiosPublic()
     const handleAccept = () => {
-
-    }
-
-    const handleReject = () => {
-        axiosPublic.delete(`/agreement/${agreement._id}`)
+        axiosPublic.put(`/agreement/${agreement._id}`)
             .then(res => {
                 axiosPublic.get('/agreement')
                     .then(res => {
+                        console.log(res.data)
+                        setAgreements(res.data)
+                    })
+            })
+
+        axiosPublic.put(`/user/${agreement.userEmail}`)
+            .then(res => {
+                console.log(res.data)
+            })
+    }
+
+    const handleReject = () => {
+        axiosPublic.put(`/agreement/${agreement._id}`)
+            .then(res => {
+                axiosPublic.get('/agreement')
+                    .then(res => {
+                        console.log(res.data)
                         setAgreements(res.data)
                     })
             })
@@ -27,6 +40,9 @@ const AgreementCard = ({ agreement, setAgreements }) => {
                 <h2><span className='font-bold'>Apartment No: </span>{agreement.apartment_no}</h2>
                 <h2><span className='font-bold'>Floor No: </span>{agreement.floor_no}</h2>
                 <h2><span className='font-bold'>Block: </span>{agreement.block_name}</h2>
+            </td>
+            <td>
+                {agreement.status}
             </td>
             <td>
                 <button className='btn btn-sm bg-green-500 text-xl text-white border-none hover:bg-green-800' onClick={handleAccept}>
