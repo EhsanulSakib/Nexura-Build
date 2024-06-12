@@ -52,6 +52,12 @@ const Drawer = () => {
                                 :
                                 ""
                         }
+                        {
+                            isAdmin ?
+                                <NavLink className="border ml-4 p-2 border-white hover:bg-white hover:text-gray-800" to='/admin-dashboard/coupons'><button className=' rounded-sm'>Manage Coupons</button></NavLink>
+                                :
+                                ""
+                        }
 
                     </ul>
                 </div>
