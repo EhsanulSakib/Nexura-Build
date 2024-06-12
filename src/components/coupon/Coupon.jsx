@@ -2,7 +2,7 @@ import React from 'react';
 
 const Coupon = ({ coupon }) => {
     return (
-        <div className="card shadow-xl mb-8 px-2 py-4">
+        <div className="card mb-8 px-2 py-4 shadow-sm border border-gray-300 mt-4">
             <div className="card-body">
                 <h2 className="card-title text-blue-500 font-bold text-2xl">{coupon.coupon_title}</h2>
                 <h3 className="card-title text-3xl text-center font-bold">{coupon.coupon_code}</h3>
