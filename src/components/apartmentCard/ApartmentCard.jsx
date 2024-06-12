@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navigation, Pagination, A11y, Autoplay } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -6,8 +6,24 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import 'swiper/css/scrollbar';
+import { AuthContext } from '../../provider/AuthProvider';
 
 const ApartmentCard = ({ apartment }) => {
+    const { user } = useContext(AuthContext)
+    const handleAgreement = () => {
+        const agreement = {
+            userName: user.displayName,
+            userEmail: user.email,
+            floor_no: apartment.floor_no,
+            block_name: apartment.block_name,
+            apartment_no: apartment.apartment_no,
+            rent: false,
+            status: "pending"
+        }
+
+
+    }
+
     return (
         <div className="card card-compact shadow-md rounded-md border border-gray-400">
             <figure>
@@ -73,8 +89,15 @@ const ApartmentCard = ({ apartment }) => {
                 </h2>
 
                 <h2 className='text-xl lg:text-2xl font-bold text-blue-400'>{apartment.price} BDT/month</h2>
-                <div className="card-actions">
-                    <button className="btn bg-blue-600 hover:bg-blue-400 text-white font-bold text-lg border-none">Agreement</button>
+                <div className="card-actions" >
+                    {
+                        apartment.rent ?
+                            <h2 className='text-xl lg:text-2xl font-bold text-blue-400'>
+                                Already In Rent
+                            </h2>
+                            :
+                            <button className="btn bg-blue-600 hover:bg-blue-400 text-white font-bold text-lg border-none" onClick={handleAgreement}>Agreement</button>
+                    }
                 </div>
             </div>
         </div>
