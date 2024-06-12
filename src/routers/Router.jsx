@@ -17,6 +17,7 @@ import ManageCupons from "../pages/manageCupons/ManageCupons";
 import AgreementRequests from "../pages/dashboard/agreementRequests/AgreementRequests";
 import MemberRoute from "./MemberRoute";
 import MemberPayment from "../pages/dashboard/memberPayment/MemberPayment";
+import MemberPaymentHistory from "../pages/dashboard/memberPaymentHistory/MemberPaymentHistory";
 
 const router = createBrowserRouter([
     {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/payment',
                 element: <MemberRoute><MemberPayment></MemberPayment></MemberRoute>
+            },
+            {
+                path: '/dashboard/payment-history',
+                element: <MemberRoute><MemberPaymentHistory></MemberPaymentHistory></MemberRoute>
             }
         ]
     },
