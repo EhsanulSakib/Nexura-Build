@@ -13,6 +13,8 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
     const [isAdmin, setIsAdmin] = useState(null)
     const [adminLoading, setAdminLoading] = useState(true)
+    const [applied, setApplied] = useState(false)
+
     const axiosPublic = useAxiosPublic()
     const GoogleProvider = new GoogleAuthProvider()
     const GitHubProvider = new GithubAuthProvider()

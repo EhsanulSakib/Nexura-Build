@@ -1,15 +1,18 @@
 import React, { useContext } from 'react';
 import { Navigation, Pagination, A11y, Autoplay } from 'swiper/modules';
-
+import Swal from "sweetalert2";
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import 'swiper/css/scrollbar';
 import { AuthContext } from '../../provider/AuthProvider';
+import useAxiosPublic from '../../hooks/useAxiosPublic/useAxiosPublic';
 
 const ApartmentCard = ({ apartment }) => {
     const { user } = useContext(AuthContext)
+    const axiosPublic = useAxiosPublic()
+
     const handleAgreement = () => {
         const agreement = {
             userName: user.displayName,
@@ -21,6 +24,22 @@ const ApartmentCard = ({ apartment }) => {
             status: "pending"
         }
 
+        Swal.fire({
+            title: "Do you want to apply to rent this apartment?",
+            showDenyButton: true,
+            confirmButtonText: "Apply",
+            denyButtonText: `Cancel`
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                axiosPublic.post('/agreement', agreement)
+                    .then(res => {
+                        Swal.fire("Applied Successfully!", "", "success");
+                    })
+            } else if (result.isDenied) {
+                Swal.fire("Canceled", "", "info");
+            }
+        });
 
     }
 
