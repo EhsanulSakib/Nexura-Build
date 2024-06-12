@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../provider/AuthProvider';
 import AdminProfile from '../../../components/dashboard/admin/adminProfile/AdminProfile';
 
