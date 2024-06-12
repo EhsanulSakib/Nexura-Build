@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../provider/AuthProvider';
+import AdminProfile from '../../../components/dashboard/admin/adminProfile/AdminProfile';
 
 const Profile = () => {
     const { user, isAdmin } = useContext(AuthContext)
@@ -31,6 +32,13 @@ const Profile = () => {
                             <h2 className='mb-4'><span className='font-bold'>Facilities:</span> none</h2>
                             <h2><span className='font-bold'>Rent:</span> none </h2>
                         </div> :
+                        ""
+                }
+
+                {
+                    isAdmin ?
+                        <AdminProfile></AdminProfile>
+                        :
                         ""
                 }
             </div>
