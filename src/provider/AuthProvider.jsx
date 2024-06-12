@@ -44,6 +44,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
+            setAdminLoading(true)
             if (currentUser) {
                 // get token and store client
                 const userInfo = { email: currentUser.email };
@@ -64,6 +65,7 @@ const AuthProvider = ({ children }) => {
             else {
                 // TODO: remove token (if token stored in the client side: Local storage, caching, in memory)
                 localStorage.removeItem('access-token');
+                setAdminLoading(false)
                 setLoading(false);
             }
         });

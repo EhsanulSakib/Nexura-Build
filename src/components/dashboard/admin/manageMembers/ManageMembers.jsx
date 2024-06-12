@@ -13,7 +13,7 @@ const ManageMembers = () => {
     }, [])
     return (
         <div>
-            <h2 className='text-xl md:text-2xl lg:text-3xl font-bold text-center mt-8'>All Members</h2>
+            <h2 className='text-xl md:text-2xl lg:text-3xl font-bold text-center my-8'>All Members</h2>
             <div className="overflow-x-auto">
                 <table className="table">
                     <thead>

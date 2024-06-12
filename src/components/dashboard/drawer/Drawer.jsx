@@ -46,6 +46,13 @@ const Drawer = () => {
                                 :
                                 ""
                         }
+                        {
+                            isAdmin ?
+                                <NavLink className="border ml-4 p-2 border-white hover:bg-white hover:text-gray-800" to='/admin-dashboard/make-announcement'><button className=' rounded-sm'>Make Announcement</button></NavLink>
+                                :
+                                ""
+                        }
+
                     </ul>
                 </div>
             </div>
