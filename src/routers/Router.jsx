@@ -14,6 +14,7 @@ import AdminDashboard from "../pages/dashboard/adminDashboard/AdminDashboard";
 import ManageMembers from "../components/dashboard/admin/manageMembers/ManageMembers";
 import MakeAnnouncement from "../pages/dashboard/makeAnnouncement/MakeAnnouncement";
 import ManageCupons from "../pages/manageCupons/ManageCupons";
+import AgreementRequests from "../pages/dashboard/agreementRequests/AgreementRequests";
 
 const router = createBrowserRouter([
     {
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
             {
                 path: '/admin-dashboard/make-announcement',
                 element: <AdminRoute><MakeAnnouncement></MakeAnnouncement></AdminRoute>
+            },
+            {
+                path: '/admin-dashboard/agreement-requests',
+                element: <AdminRoute><AgreementRequests></AgreementRequests></AdminRoute>
             },
             {
                 path: '/admin-dashboard/coupons',

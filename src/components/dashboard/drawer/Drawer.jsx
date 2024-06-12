@@ -39,7 +39,6 @@ const Drawer = () => {
                         <div className="divider">
                         </div>
 
-
                         {
                             isAdmin ?
                                 <NavLink className="border ml-4 p-2 border-white hover:bg-white hover:text-gray-800" to='/admin-dashboard/manage-members'><button className=' rounded-sm'>Manage Members</button></NavLink>
@@ -49,6 +48,12 @@ const Drawer = () => {
                         {
                             isAdmin ?
                                 <NavLink className="border ml-4 p-2 border-white hover:bg-white hover:text-gray-800" to='/admin-dashboard/make-announcement'><button className=' rounded-sm'>Make Announcement</button></NavLink>
+                                :
+                                ""
+                        }
+                        {
+                            isAdmin ?
+                                <NavLink className="border ml-4 p-2 border-white hover:bg-white hover:text-gray-800" to='/admin-dashboard/agreement-requests'><button className=' rounded-sm'>Agreement Requests</button></NavLink>
                                 :
                                 ""
                         }
