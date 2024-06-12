@@ -14,6 +14,8 @@ const AuthProvider = ({ children }) => {
     const [isAdmin, setIsAdmin] = useState(null)
     const [adminLoading, setAdminLoading] = useState(true)
     const [applied, setApplied] = useState([])
+    const [isMember, setIsMember] = useState([])
+    const [memberLoading, setMemberLoading] = useState(true)
 
     const axiosPublic = useAxiosPublic()
     const GoogleProvider = new GoogleAuthProvider()
@@ -54,6 +56,11 @@ const AuthProvider = ({ children }) => {
                     .then(res => {
                         if (res.data.token) {
                             localStorage.setItem('access-token', res.data.token);
+                            axiosPublic.get(`/members/${currentUser.email}`)
+                                .then(res => {
+                                    setIsMember(res.data)
+                                    setMemberLoading(false)
+                                })
                             axiosPublic.get(`/agreement/${currentUser.email}`)
                                 .then(res => {
                                     setApplied(res.data)
@@ -86,7 +93,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
 
-    const userInfo = { applied, setApplied, isAdmin, adminLoading, setAdminLoading, loading, user, darkMode, setDarkMode, logOut, signIn, handleGoogleSignIn, handleGitHubSignIn, createUser }
+    const userInfo = { isMember, memberLoading, applied, setApplied, isAdmin, adminLoading, setAdminLoading, loading, user, darkMode, setDarkMode, logOut, signIn, handleGoogleSignIn, handleGitHubSignIn, createUser }
     return (
         <AuthContext.Provider value={userInfo}>
             {children}

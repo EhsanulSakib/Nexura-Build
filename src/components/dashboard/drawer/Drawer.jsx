@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../provider/AuthProvider';
 import logo from '/nexura-logo.png'
 const Drawer = () => {
-    const { darkMode, setDarkMode, user, isAdmin } = useContext(AuthContext)
+    const { darkMode, setDarkMode, user, isAdmin, isMember } = useContext(AuthContext)
     return (
         <div className={`w-1/3 fixed top-0 left-0 z-50`}>
             <div className={`drawer lg:drawer-open`}>
@@ -38,6 +38,18 @@ const Drawer = () => {
 
                         <div className="divider">
                         </div>
+                        {
+                            isMember ?
+                                <NavLink className="border ml-4 p-2 border-white hover:bg-white hover:text-gray-800" to='/dashboard/payment'><button className=' rounded-sm'>Make Payment</button></NavLink>
+                                :
+                                ""
+                        }
+                        {
+                            isMember ?
+                                <NavLink className="border ml-4 p-2 border-white hover:bg-white hover:text-gray-800" to='/dashboard/payment-history'><button className=' rounded-sm'>Payment History</button></NavLink>
+                                :
+                                ""
+                        }
 
                         {
                             isAdmin ?

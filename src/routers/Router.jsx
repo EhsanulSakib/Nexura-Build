@@ -15,6 +15,8 @@ import ManageMembers from "../components/dashboard/admin/manageMembers/ManageMem
 import MakeAnnouncement from "../pages/dashboard/makeAnnouncement/MakeAnnouncement";
 import ManageCupons from "../pages/manageCupons/ManageCupons";
 import AgreementRequests from "../pages/dashboard/agreementRequests/AgreementRequests";
+import MemberRoute from "./MemberRoute";
+import MemberPayment from "../pages/dashboard/memberPayment/MemberPayment";
 
 const router = createBrowserRouter([
     {
@@ -53,6 +55,10 @@ const router = createBrowserRouter([
                 path: '/dashboard/announcements',
                 element: <PrivateRouter><Announcements></Announcements></PrivateRouter>
             },
+            {
+                path: '/dashboard/payment',
+                element: <MemberRoute><MemberPayment></MemberPayment></MemberRoute>
+            }
         ]
     },
     {
