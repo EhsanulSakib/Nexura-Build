@@ -1,13 +1,21 @@
 import React from 'react';
 import { TiTick } from "react-icons/ti";
-
-const AgreementCard = ({ agreement }) => {
+import { RxCross2 } from "react-icons/rx";
+import useAxiosPublic from '../../../hooks/useAxiosPublic/useAxiosPublic';
+const AgreementCard = ({ agreement, setAgreements }) => {
+    const axiosPublic = useAxiosPublic()
     const handleAccept = () => {
 
     }
 
     const handleReject = () => {
-
+        axiosPublic.delete(`/agreement/${agreement._id}`)
+            .then(res => {
+                axiosPublic.get('/agreement')
+                    .then(res => {
+                        setAgreements(res.data)
+                    })
+            })
     }
     return (
         <tr>
@@ -27,7 +35,7 @@ const AgreementCard = ({ agreement }) => {
             </td>
             <td>
                 <button className='btn btn-sm bg-red-500 text-xl text-white border-none hover:bg-red-800' onClick={handleReject}>
-                    <TiTick />
+                    <RxCross2 />
                 </button>
             </td>
 

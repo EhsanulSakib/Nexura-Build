@@ -10,7 +10,7 @@ import { AuthContext } from '../../provider/AuthProvider';
 import useAxiosPublic from '../../hooks/useAxiosPublic/useAxiosPublic';
 
 const ApartmentCard = ({ apartment }) => {
-    const { applied } = useContext(AuthContext)
+    const { user, applied, setApplied } = useContext(AuthContext)
     const axiosPublic = useAxiosPublic()
 
     const handleAgreement = () => {
@@ -34,6 +34,10 @@ const ApartmentCard = ({ apartment }) => {
             if (result.isConfirmed) {
                 axiosPublic.post('/agreement', agreement)
                     .then(res => {
+                        axiosPublic.get(`/agreement/${user.email}`)
+                            .then(res => {
+                                setApplied(res.data)
+                            })
                         Swal.fire("Applied Successfully!", "", "success");
                     })
             } else if (result.isDenied) {

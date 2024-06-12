@@ -25,7 +25,7 @@ const AgreementRequests = () => {
                     </thead>
                     <tbody>
                         {
-                            agreements?.map(agreement => <AgreementCard key={agreement._id} agreement={agreement}></AgreementCard>)
+                            agreements?.map(agreement => <AgreementCard key={agreement._id} agreement={agreement} setAgreements={setAgreements}></AgreementCard>)
                         }
                     </tbody>
                 </table>
