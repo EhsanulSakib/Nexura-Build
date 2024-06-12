@@ -13,7 +13,7 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
     const [isAdmin, setIsAdmin] = useState(null)
     const [adminLoading, setAdminLoading] = useState(true)
-    const [applied, setApplied] = useState(false)
+    const [applied, setApplied] = useState([])
 
     const axiosPublic = useAxiosPublic()
     const GoogleProvider = new GoogleAuthProvider()
@@ -54,6 +54,10 @@ const AuthProvider = ({ children }) => {
                     .then(res => {
                         if (res.data.token) {
                             localStorage.setItem('access-token', res.data.token);
+                            axiosPublic.get(`/agreement/${currentUser.email}`)
+                                .then(res => {
+                                    setApplied(res.data)
+                                })
                             axiosPublic.get(`/users/admin/${currentUser.email}`)
                                 .then(res => {
                                     console.log(res.data)
@@ -76,8 +80,13 @@ const AuthProvider = ({ children }) => {
         }
     }, [axiosPublic])
 
+    useEffect(() => {
+        setLoading(true)
 
-    const userInfo = { isAdmin, adminLoading, setAdminLoading, loading, user, darkMode, setDarkMode, logOut, signIn, handleGoogleSignIn, handleGitHubSignIn, createUser }
+    }, [])
+
+
+    const userInfo = { applied, isAdmin, adminLoading, setAdminLoading, loading, user, darkMode, setDarkMode, logOut, signIn, handleGoogleSignIn, handleGitHubSignIn, createUser }
     return (
         <AuthContext.Provider value={userInfo}>
             {children}

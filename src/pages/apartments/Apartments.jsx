@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import useAxiosPublic from '../../hooks/useAxiosPublic/useAxiosPublic';
 import ApartmentCard from '../../components/apartmentCard/ApartmentCard';
 import './Apartments.css'
+import { AuthContext } from '../../provider/AuthProvider';
 
 const Apartments = () => {
     const [apartments, setApartments] = useState([])

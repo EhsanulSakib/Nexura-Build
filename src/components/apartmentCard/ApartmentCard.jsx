@@ -10,7 +10,7 @@ import { AuthContext } from '../../provider/AuthProvider';
 import useAxiosPublic from '../../hooks/useAxiosPublic/useAxiosPublic';
 
 const ApartmentCard = ({ apartment }) => {
-    const { user } = useContext(AuthContext)
+    const { applied } = useContext(AuthContext)
     const axiosPublic = useAxiosPublic()
 
     const handleAgreement = () => {
@@ -115,7 +115,12 @@ const ApartmentCard = ({ apartment }) => {
                                 Already In Rent
                             </h2>
                             :
-                            <button className="btn bg-blue-600 hover:bg-blue-400 text-white font-bold text-lg border-none" onClick={handleAgreement}>Agreement</button>
+                            applied ?
+                                <h2 className='text-xs md:text-sm lg:text-base xl:text-lg text-blue-500'>
+                                    You can't apply more than an Apartment.
+                                </h2>
+                                :
+                                <button className="btn bg-blue-600 hover:bg-blue-400 text-white font-bold text-lg border-none" onClick={handleAgreement}>Agreement</button>
                     }
                 </div>
             </div>
