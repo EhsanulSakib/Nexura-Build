@@ -2,14 +2,18 @@
     height: 2rem;
     width: 2rem;
     border: 1px solid rgb(37, 99, 235);
-    font-weight: 700;
+    font-weight: 500;
     border-radius:100%;
     margin-left: 0.5rem;
-    
+    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.pagination button:hover{
+    background: rgb(37 99 235);
+    color: white;
 }
 
 .pagination .selected{
     background: rgb(37 99 235);
     color: white;
-    font-weight: 900;
 }

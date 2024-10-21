@@ -48,7 +48,7 @@ const ApartmentCard = ({ apartment }) => {
     }
 
     return (
-        <div className="card card-compact shadow-md rounded-md border border-gray-400">
+        <div className="card card-compact shadow-sm rounded-md border border-gray-400 shadow-gray-400">
             <figure>
                 <Swiper
                     modules={[A11y, Autoplay]}
@@ -102,12 +102,13 @@ const ApartmentCard = ({ apartment }) => {
 
             </figure>
             <div className="card-body">
-                <h2 className="card-title  text-2xl lg:text-3xl">Apartment: {apartment.apartment_no}</h2>
+                <h2 className="card-title text-2xl lg:text-3xl">Apartment: {apartment.apartment_no}</h2>
                 <div className='flex gap-4 text-xs md:text-sm lg:text-base xl:text-lg'>
-                    <h2>{apartment.block_name}</h2>
-                    <h2>Floor No: {apartment.floor_no}</h2>
+                    <h2 className='font-semibold'>{apartment.block_name}</h2>
+                    <h2 className='font-semibold'>Floor No: {apartment.floor_no}</h2>
                 </div>
                 <h2 className='text-xs md:text-sm lg:text-base xl:text-lg'>
+                    <span className='font-semibold'>Facilities: </span>
                     2 Bedrooms | 2 Bathrooms | 1 Balcony | 1 Kitchen | 1 Drawing Room
                 </h2>
 

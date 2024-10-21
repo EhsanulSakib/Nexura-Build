@@ -33,11 +33,14 @@ const Apartments = () => {
     }, [currentPage, itemPerPage])
 
     return (
-        <div className='min-h-screen flex flex-col justify-between w-11/12 m-auto'>
-            <div className=' my-4 md:my-8 lg:my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-4 gap-y-8'>
-                {
-                    apartments?.map(apartment => <ApartmentCard key={apartment._id} apartment={apartment}></ApartmentCard>)
-                }
+        <div className='min-h-screen flex flex-col justify-between mx-[2%] xl:mx-[3%] m-auto'>
+            <div className='my-4 lg:my-8'>
+                <h2 className='text-center text-2xl lg:text-3xl font-bold mb-4 lg:mb-6'>Apartments</h2>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-4 gap-y-8'>
+                    {
+                        apartments?.map(apartment => <ApartmentCard key={apartment._id} apartment={apartment}></ApartmentCard>)
+                    }
+                </div>
             </div>
 
             <div className='pagination flex items-center flex-wrap justify-center mb-4 md:mb-8 lg:mb-12 gap-2'>

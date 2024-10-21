@@ -15,6 +15,10 @@ const Navbar = () => {
     const notify = () => toast.error("User Signed Out!");
     const navigate = useNavigate()
 
+    const activeLink = ({ isActive }) => {
+        return isActive ? 'text-blue-500' : ''
+    }
+
     const handleSignOut = () => {
         logOut()
             .then(result => {
@@ -25,11 +29,11 @@ const Navbar = () => {
     }
 
     const links = <>
-        <ul className={`xl:flex flex-row gap-2 duration-300 top-12 md:top-[3rem] lg:top-16 absolute ${darkMode ? 'bg-gray-800' : 'bg-slate-100'} xl:static ${open ? 'left-0' : '-left-60'} p-10 xl:p-0 shadow-lg xl:shadow-none no-underline xl:gap-6 text-base xl:text-xl z-50 font-bold`}>
-            <li className="pb-1 xl:pb-0"><NavLink className={'focus:border-b-2 '} to='/'>Home</NavLink></li>
+        <ul className={`xl:flex flex-row gap-2 xl:gap-6 duration-300 top-[3rem] lg:top-[4rem] absolute ${darkMode ? 'bg-gray-900' : 'bg-slate-200'} xl:static ${open ? 'left-0' : '-left-60'} p-10 xl:p-0 shadow-lg xl:shadow-none no-underline xl:gap-6 text-base xl:text-xl z-50 font-semibold`}>
+            <li className="pb-1 xl:pb-0 hover:border-b-2 cursor-pointer"><NavLink className={activeLink} to='/'>Home</NavLink></li>
             {
                 user ?
-                    <li className="pb-1 xl:pb-0"><NavLink className={'focus:border-b-2 '} to='/apartments'>Apartments</NavLink></li>
+                    <li className="pb-1 xl:pb-0 hover:border-b-2 cursor-pointer"><NavLink className={activeLink} to='/apartments'>Apartments</NavLink></li>
                     :
                     ""
             }
@@ -54,7 +58,7 @@ const Navbar = () => {
 
 
     return (
-        <nav className="flex items-center px-2 xl:px-4 py-1 xl:py-2 justify-between m-auto text-xl font-medium  ">
+        <nav className="flex items-center mx-[1%] justify-between m-auto text-xl font-medium font-raleway py-1 lg:py-2">
             <div className="flex items-center xl:hidden">
                 <div className="xl:hidden" onClick={() => setOpen(!open)}>
                     {
@@ -81,16 +85,16 @@ const Navbar = () => {
                     {links}
                 </div>
 
-                <div className="flex items-center z-10">
+                <div className="flex items-center gap-2 justify-center z-10">
                     <div>
                         {
                             darkMode ?
-                                <button className="btn btn-sm lg:btn-md btn-circle btn-ghost border-none text-white text-xl lg:text-3xl shadow-none" onClick={() => setDarkMode(!darkMode)}>
+                                <button className="text-md lg:text-2xl" onClick={() => setDarkMode(!darkMode)}>
                                     <MdLightMode />
                                 </button>
 
                                 :
-                                <button className="btn btn-sm lg:btn-md btn-circle btn-ghost border-none text-gray-800 text-xl lg:text-3xl shadow-none" onClick={() => setDarkMode(!darkMode)}>
+                                <button className="text-md lg:text-2xl" onClick={() => setDarkMode(!darkMode)}>
                                     <MdDarkMode />
                                 </button>
 
@@ -99,9 +103,9 @@ const Navbar = () => {
                     <div>
                         {
                             user && !isAdmin ?
-                                <div className="dropdown dropdown-bottom dropdown-end ">
+                                <div className="dropdown dropdown-bottom dropdown-end">
                                     <div tabIndex={0} role="button" className=""><img src={user.photoURL} alt="" className="w-8 lg:w-12 h-8 lg:h-12 object-cover object-top rounded-full" /></div>
-                                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 mt-1 rounded-md w-44 border border-gray-400 bg-slate-100 shadow-lg">
+                                    <ul tabIndex={0} className={`dropdown-content z-[1] menu p-2 mt-1 rounded-md w-44 ${darkMode ? "bg-gray-700" : "bg-gray-300"} shadow-lg`}>
                                         <h2 className="font-bold text-center">{user.displayName}</h2>
                                         <Link to='/dashboard'><button className="btn border-none bg-blue-600 hover:bg-blue-500 btn-sm w-full mt-2 text-white rounded-sm">
                                             Dashboard
@@ -118,9 +122,9 @@ const Navbar = () => {
 
                         {
                             isAdmin ?
-                                <div className="dropdown dropdown-bottom dropdown-end ">
+                                <div className="dropdown dropdown-bottom dropdown-end">
                                     <div tabIndex={0} role="button" className=""><img src={user.photoURL} alt="" className="w-8 lg:w-12 h-8 lg:h-12 object-cover object-top rounded-full" /></div>
-                                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 mt-1 rounded-md w-44 border border-gray-400 bg-slate-100 shadow-lg">
+                                    <ul tabIndex={0} className={`dropdown-content z-[1] menu p-2 mt-1 rounded-md w-44 border ${darkMode ? "border-slate-400" : "border-gray-800"} shadow-lg`}>
                                         <h2 className="font-bold text-center text-black">{user.displayName}</h2>
                                         <Link to='/admin-dashboard/'><button className="btn border-none bg-blue-600 hover:bg-blue-500 btn-sm w-full mt-2 text-white rounded-sm">
                                             Dashboard
@@ -135,25 +139,16 @@ const Navbar = () => {
                         }
                     </div>
 
-                    <div className="hidden xl:flex">
+                    <div className="hidden lg:flex">
                         {
                             user ?
                                 ""
                                 :
-                                <button className="btn bg-blue-600 hover-bg-blue-500 rounded-md text-sm lg:text-base border-none text-white font-bold">
+                                <button className="btn rounded-full bg-blue-600 hover-bg-blue-500text-sm lg:text-base border-none text-white font-bold">
                                     <Link to='/login'>Login</Link>
                                 </button>
                         }
                     </div >
-
-                    <div className="hidden xl:flex">
-                        {
-                            user ?
-                                ""
-                                :
-                                <button className="btn ml-2 bg-blue-600 hover-bg-blue-500 rounded-md text-sm lg:text-base border-none text-white font-bold" ><Link to='/register'>Register</Link></button>
-                        }
-                    </div>
                 </div>
             </div>
         </nav>

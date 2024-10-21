@@ -6,9 +6,9 @@ import { IoCaretBackSharp } from "react-icons/io5";
 const ErrorPage = () => {
 
     return (
-        <div className="flex flex-col items-center min-h-screen bg-white">
+        <div className="flex flex-col justify-center items-center min-h-screen bg-white">
             <Lottie animationData={error} className="h-[32rem]" />
-            <button className="btn btn-active w-48"><Link to='/' className="flex gap-1 items-center"><IoCaretBackSharp className="text-lg" /> <h2>Go to Homepage</h2></Link></button>
+            <button className="btn btn-info w-48 text-slate-100"><Link to='/' className="flex gap-1 items-center"><IoCaretBackSharp className="text-lg" /> <h2>Go to Homepage</h2></Link></button>
         </div>
     );
 };
