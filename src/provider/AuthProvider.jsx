@@ -3,6 +3,7 @@ import app from "../firebase/firebase.config";
 import { createContext, useEffect, useState } from "react";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import useAxiosPublic from "../hooks/useAxiosPublic/useAxiosPublic";
+import axios from "axios";
 
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
@@ -10,12 +11,10 @@ const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
     const [darkMode, setDarkMode] = useState(false)
     const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(true)
+    const [databaseUser, setDatabaseUser] = useState(null)
+    const [loading, setLoading] = useState(false)
     const [isAdmin, setIsAdmin] = useState(null)
     const [adminLoading, setAdminLoading] = useState(true)
-    const [applied, setApplied] = useState([])
-    const [isMember, setIsMember] = useState([])
-    const [memberLoading, setMemberLoading] = useState(true)
 
     const axiosPublic = useAxiosPublic()
     const GoogleProvider = new GoogleAuthProvider()
@@ -47,6 +46,7 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            setLoading(true)
             setUser(currentUser);
             setAdminLoading(true)
             if (currentUser) {
@@ -56,24 +56,15 @@ const AuthProvider = ({ children }) => {
                     .then(res => {
                         if (res.data.token) {
                             localStorage.setItem('access-token', res.data.token);
-                            axiosPublic.get(`/members/${currentUser.email}`)
+                            axiosPublic.get(`/users/${currentUser.email}`)
                                 .then(res => {
-                                    setIsMember(res.data)
-                                    setMemberLoading(false)
-                                })
-                            axiosPublic.get(`/agreement/${currentUser.email}`)
-                                .then(res => {
-                                    setApplied(res.data)
-                                })
-                            axiosPublic.get(`/users/admin/${currentUser.email}`)
-                                .then(res => {
-                                    console.log(res.data)
-                                    setIsAdmin(res.data.admin)
-                                    setAdminLoading(false)
+                                    setDatabaseUser(res.data)
+                                    setLoading(false)
                                 })
                             setLoading(false);
                         }
                     })
+                setLoading(false)
             }
             else {
                 // TODO: remove token (if token stored in the client side: Local storage, caching, in memory)
@@ -89,11 +80,10 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         setLoading(true)
-
     }, [])
 
 
-    const userInfo = { isMember, memberLoading, applied, setApplied, isAdmin, adminLoading, setAdminLoading, loading, user, darkMode, setDarkMode, logOut, signIn, handleGoogleSignIn, handleGitHubSignIn, createUser }
+    const userInfo = { databaseUser, isAdmin, adminLoading, setAdminLoading, loading, user, darkMode, setDarkMode, logOut, signIn, handleGoogleSignIn, handleGitHubSignIn, createUser }
     return (
         <AuthContext.Provider value={userInfo}>
             {children}

@@ -5,7 +5,7 @@ import UserProfile from '../../../components/dashboard/userProfile/UserProfile';
 import MemberProfile from '../../../components/dashboard/memberProfile/MemberProfile';
 
 const Profile = () => {
-    const { user, isAdmin, isMember } = useContext(AuthContext)
+    const { databaseUser, user, isAdmin, isMember } = useContext(AuthContext)
     const date = new Date();
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -19,26 +19,29 @@ const Profile = () => {
                     <figure className="px-4 pt-4">
                         <img src={user.photoURL} alt="profile picture" className="h-44 w-44 rounded-full object-cover object-top" />
                     </figure>
-                    <div className="card-body pl-3 text-center">
+                    <div className="card-body text-center">
+                        <h2 className='text-sm md:text-lg font-bold'>({databaseUser.role})</h2>
+
                         <h2 className="text-xl md:text-2xl lg:text-3xl text-blue-500 font-semibold">{user.displayName}</h2>
-                        <h2>{user.email}</h2>
+
+                        <h2 className='text-sm md:text-lg font-semibold'>{user.email}</h2>
                     </div>
                 </div>
 
                 {
-                    user && !isAdmin && !isMember ?
+                    databaseUser.role === "user" ?
                         <UserProfile /> :
                         ""
                 }
 
                 {
-                    isMember ?
+                    databaseUser.role === "member" ?
                         <MemberProfile /> :
                         ""
                 }
 
                 {
-                    isAdmin ?
+                    databaseUser.role === "admin" ?
                         <AdminProfile></AdminProfile>
                         :
                         ""

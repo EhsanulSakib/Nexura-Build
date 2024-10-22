@@ -3,8 +3,9 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 
 const PrivateRouter = ({ children }) => {
-    const { user, loading } = useContext(AuthContext)
+    const { databaseUser, loading } = useContext(AuthContext)
     const location = useLocation()
+    console.log({ loading, databaseUser })
 
     if (loading) {
         return <div className='w-screen h-screen text-center z-10'>
@@ -12,7 +13,7 @@ const PrivateRouter = ({ children }) => {
         </div>
     }
 
-    if (user) {
+    if (databaseUser) {
         return children
     }
 

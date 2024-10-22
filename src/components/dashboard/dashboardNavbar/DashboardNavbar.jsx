@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import logo from '/nexura-logo.png'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { MdDarkMode, MdLightMode, MdOutlineLogout } from "react-icons/md";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { AuthContext } from "../../../provider/AuthProvider";
 import { IoCaretBackOutline } from "react-icons/io5";
 
@@ -37,7 +37,7 @@ const DashboardNavbar = () => {
         <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
           {
             user ?
-              <NavLink className={activeLink} to={isAdmin ? '/admin-dashboard/' : '/dashboard/'}><button className=' rounded-sm'>My Profile</button></NavLink>
+              <NavLink className={activeLink} to={isAdmin ? '/admin-dashboard/' : '/dashboard'}><button className=' rounded-sm'>My Profile</button></NavLink>
               :
               ""
           }

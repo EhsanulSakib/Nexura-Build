@@ -102,12 +102,12 @@ const Navbar = () => {
                     </div>
                     <div>
                         {
-                            user && !isAdmin ?
+                            user ?
                                 <div className="dropdown dropdown-bottom dropdown-end">
                                     <div tabIndex={0} role="button" className=""><img src={user.photoURL} alt="" className="w-8 lg:w-12 h-8 lg:h-12 object-cover object-top rounded-full" /></div>
                                     <ul tabIndex={0} className={`dropdown-content z-[1] menu p-2 mt-1 rounded-md w-44 ${darkMode ? "bg-gray-700" : "bg-gray-300"} shadow-lg`}>
                                         <h2 className="font-bold text-center">{user.displayName}</h2>
-                                        <Link to='/dashboard'><button className="btn border-none bg-blue-600 hover:bg-blue-500 btn-sm w-full mt-2 text-white rounded-sm">
+                                        <Link to={isAdmin ? '/admin-dashboard/' : '/dashboard'}><button className="btn border-none bg-blue-600 hover:bg-blue-500 btn-sm w-full mt-2 text-white rounded-sm">
                                             Dashboard
                                         </button></Link>
                                         <Link><button className="btn border-none bg-red-800 hover:bg-red-600 btn-sm w-full my-1 text-white rounded-sm" onClick={handleSignOut}>
@@ -116,24 +116,6 @@ const Navbar = () => {
                                     </ul>
                                 </div>
 
-                                :
-                                ""
-                        }
-
-                        {
-                            isAdmin ?
-                                <div className="dropdown dropdown-bottom dropdown-end">
-                                    <div tabIndex={0} role="button" className=""><img src={user.photoURL} alt="" className="w-8 lg:w-12 h-8 lg:h-12 object-cover object-top rounded-full" /></div>
-                                    <ul tabIndex={0} className={`dropdown-content z-[1] menu p-2 mt-1 rounded-md w-44 border ${darkMode ? "border-slate-400" : "border-gray-800"} shadow-lg`}>
-                                        <h2 className="font-bold text-center text-black">{user.displayName}</h2>
-                                        <Link to='/admin-dashboard/'><button className="btn border-none bg-blue-600 hover:bg-blue-500 btn-sm w-full mt-2 text-white rounded-sm">
-                                            Dashboard
-                                        </button></Link>
-                                        <Link><button className="btn border-none bg-red-800 hover:bg-red-600 btn-sm w-full my-1 text-white rounded-sm" onClick={handleSignOut}>
-                                            Logout
-                                        </button></Link>
-                                    </ul>
-                                </div>
                                 :
                                 ""
                         }
