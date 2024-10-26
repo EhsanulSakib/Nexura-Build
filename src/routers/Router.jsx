@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
-                path: '/dashboard/',
+                path: '/dashboard',
                 element: <PrivateRouter><Profile /></PrivateRouter>
             },
             {
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/admin-dashboard',
-        element: <AdminRoute><AdminDashboard></AdminDashboard></AdminRoute>,
+        element: <AdminRoute><Dashboard></Dashboard></AdminRoute>,
         errorElement: <ErrorPage></ErrorPage>,
         children: [
             {

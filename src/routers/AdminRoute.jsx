@@ -4,16 +4,16 @@ import { AuthContext } from "../provider/AuthProvider";
 
 
 const AdminRoute = ({ children }) => {
-    const { user, isAdmin, adminLoading } = useContext(AuthContext)
+    const { user, databaseUser, loading } = useContext(AuthContext)
     const location = useLocation();
 
-    if (adminLoading) {
+    if (loading) {
         return <div className='w-screen h-screen text-center z-10'>
             <h1 className="text-blue-400 loading loading-dots loading-lg block m-auto font-extrabold"></h1>
         </div>
     }
 
-    if (isAdmin) {
+    if (databaseUser.role === "admin") {
         return children;
     }
 

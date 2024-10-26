@@ -11,10 +11,8 @@ const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
     const [darkMode, setDarkMode] = useState(false)
     const [user, setUser] = useState(null)
-    const [databaseUser, setDatabaseUser] = useState(null)
-    const [loading, setLoading] = useState(false)
-    const [isAdmin, setIsAdmin] = useState(null)
-    const [adminLoading, setAdminLoading] = useState(true)
+    const [databaseUser, setDatabaseUser] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const axiosPublic = useAxiosPublic()
     const GoogleProvider = new GoogleAuthProvider()
@@ -47,29 +45,30 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setLoading(true)
+            console.log(currentUser)
             setUser(currentUser);
-            setAdminLoading(true)
             if (currentUser) {
                 // get token and store client
                 const userInfo = { email: currentUser.email };
-                axiosPublic.post('/jwt', userInfo)
+                // axiosPublic.post('/jwt', userInfo)
+                //     .then(res => {
+                //         if (res.data.token) {
+                //             localStorage.setItem('access-token', res.data.token);
+                //             axiosPublic.get(`/users/${currentUser.email}`)
+                //                 .then(res => {
+                //                     setDatabaseUser(res.data)
+                //                 })
+                //         }
+                //     })
+                axiosPublic.get(`/users/${currentUser.email}`)
                     .then(res => {
-                        if (res.data.token) {
-                            localStorage.setItem('access-token', res.data.token);
-                            axiosPublic.get(`/users/${currentUser.email}`)
-                                .then(res => {
-                                    setDatabaseUser(res.data)
-                                    setLoading(false)
-                                })
-                            setLoading(false);
-                        }
+                        setDatabaseUser(res.data)
                     })
                 setLoading(false)
             }
             else {
                 // TODO: remove token (if token stored in the client side: Local storage, caching, in memory)
                 localStorage.removeItem('access-token');
-                setAdminLoading(false)
                 setLoading(false);
             }
         });
@@ -83,7 +82,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
 
-    const userInfo = { databaseUser, isAdmin, adminLoading, setAdminLoading, loading, user, darkMode, setDarkMode, logOut, signIn, handleGoogleSignIn, handleGitHubSignIn, createUser }
+    const userInfo = { databaseUser, loading, user, darkMode, setDarkMode, logOut, signIn, handleGoogleSignIn, handleGitHubSignIn, createUser }
     return (
         <AuthContext.Provider value={userInfo}>
             {children}

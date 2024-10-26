@@ -42,7 +42,7 @@ const Profile = () => {
 
                 {
                     databaseUser.role === "admin" ?
-                        <AdminProfile></AdminProfile>
+                        <AdminProfile />
                         :
                         ""
                 }
