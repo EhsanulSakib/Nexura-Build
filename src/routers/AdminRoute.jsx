@@ -4,8 +4,9 @@ import { AuthContext } from "../provider/AuthProvider";
 
 
 const AdminRoute = ({ children }) => {
-    const { user, databaseUser, loading } = useContext(AuthContext)
+    const { databaseUser, loading } = useContext(AuthContext)
     const location = useLocation();
+    console.log({ loading, databaseUser })
 
     if (loading) {
         return <div className='w-screen h-screen text-center z-10'>

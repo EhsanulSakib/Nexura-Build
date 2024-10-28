@@ -1,7 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic";
+import { useContext } from "react";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 const MakeAnnouncement = () => {
     const axiosPublic = useAxiosPublic()
+    const route = useNavigate()
+    const notify = () => toast.success("Announcement Added Successfully");
+    const { darkMode } = useContext(AuthContext)
 
     const handleAnnouncement = event => {
         event.preventDefault()
@@ -22,20 +28,23 @@ const MakeAnnouncement = () => {
 
         axiosPublic.post('/announcements', announcement)
             .then(res => {
-                console.log(res.data)
+                if (res.data.acknowledged) {
+                    form.reset()
+                    route('/dashboard/announcements')
+                    notify()
+                }
             })
 
     }
     return (
-
         <div>
-            <h2 className='text-xl md:text-2xl lg:text-3xl font-bold text-center my-8'>Make Announcement</h2>
-            <form onSubmit={handleAnnouncement} className="p-4 rounded-md w-11/12 border border-gray-400 shadow-sm m-auto mb-8">
-                <input type="text" name="post_title" id="" className="w-full p-4 bg-transparent border border-gray-300 rounded-md" placeholder="Write Announcement Title" />
+            <h2 className='text-xl md:text-xl lg:text-3xl font-bold mt-1 lg:mt-4'>Make Announcement</h2>
+            <form onSubmit={handleAnnouncement} className={`${darkMode ? "bg-gray-900 border-gray-700" : "bg-slate-50 border-gray-300"} mt-4 lg:mt-8 p-4 rounded-md w-full shadow-md m-auto mb-8 border`}>
+                <input type="text" name="post_title" id="" className={`${darkMode ? "bg-gray-700 border-gray-700" : "bg-slate-100 border-gray-300"} w-full p-4 shadow-sm rounded-md border`} placeholder="Write Announcement Title" />
 
-                <textarea name="description" id="" className="p-4 w-full min-h-44 max-h-44 my-4 border border-gray-300 rounded-md bg-transparent" placeholder="Write Announcement Description"></textarea>
+                <textarea name="description" id="" className={`${darkMode ? "bg-gray-700 border-gray-700" : "bg-slate-100 border-gray-300"} p-4 w-full min-h-44 max-h-44 my-4 rounded-md shadow-sm border`} placeholder="Write Announcement Description"></textarea>
 
-                <input type="submit" value="Post" className="btn text-lg btn-info bg-blue-500 font-bold text-white col-span-2 py-2 w-full" />
+                <input type="submit" value="Post" className="btn text-lg btn-info bg-blue-500 hover:bg-blue-400 border-none font-bold text-white col-span-2 py-2 w-full" />
             </form>
         </div>
     );

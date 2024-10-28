@@ -11,7 +11,7 @@ import { MdDarkMode, MdLightMode, MdOutlineLogout } from "react-icons/md";
 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
-    const { user, logOut, darkMode, setDarkMode, isAdmin } = useContext(AuthContext)
+    const { user, logOut, darkMode, setDarkMode, databaseUser } = useContext(AuthContext)
     const notify = () => toast.error("User Signed Out!");
     const navigate = useNavigate()
 
@@ -107,7 +107,7 @@ const Navbar = () => {
                                     <div tabIndex={0} role="button" className=""><img src={user.photoURL} alt="" className="w-8 lg:w-12 h-8 lg:h-12 object-cover object-top rounded-full" /></div>
                                     <ul tabIndex={0} className={`dropdown-content z-[1] menu p-2 mt-1 rounded-md w-44 ${darkMode ? "bg-gray-700" : "bg-gray-300"} shadow-lg`}>
                                         <h2 className="font-bold text-center">{user.displayName}</h2>
-                                        <Link to={isAdmin ? '/admin-dashboard/' : '/dashboard'}><button className="btn border-none bg-blue-600 hover:bg-blue-500 btn-sm w-full mt-2 text-white rounded-sm">
+                                        <Link to={databaseUser.role === 'admin' ? '/admin-dashboard/profile' : '/dashboard/profile'}><button className="btn border-none bg-blue-600 hover:bg-blue-500 btn-sm w-full mt-2 text-white rounded-sm">
                                             Dashboard
                                         </button></Link>
                                         <Link><button className="btn border-none bg-red-800 hover:bg-red-600 btn-sm w-full my-1 text-white rounded-sm" onClick={handleSignOut}>

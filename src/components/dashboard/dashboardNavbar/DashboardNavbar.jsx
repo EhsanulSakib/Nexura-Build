@@ -12,7 +12,7 @@ import { IoCaretBackOutline } from "react-icons/io5";
 
 const DashboardNavbar = () => {
   const [open, setOpen] = useState(false)
-  const { user, logOut, darkMode, setDarkMode, isAdmin } = useContext(AuthContext)
+  const { user, logOut, darkMode, setDarkMode, databaseUser } = useContext(AuthContext)
   const notify = () => toast.error("User Signed Out!");
   const navigate = useNavigate()
 
@@ -30,24 +30,66 @@ const DashboardNavbar = () => {
   }
 
   const links = <>
-    <ul className={`min-h-screen pb-24 justify-between flex flex-col gap-2 duration-500 top-[3rem] w-2/3 md:w-1/2 lg:w-1/3 lg:top-[4.5rem] absolute bg-gradient-to-r from-blue-600 to-blue-400 text-slate-200 font-semibold ${open ? 'left-0' : '-left-[100%]'} p-10 shadow-lg no-underline xl:gap-6 text-base xl:text-xl z-50 font-semibold`}>
+    <ul className={`min-h-screen pb-24 justify-between flex flex-col gap-2 duration-500 top-[3rem] w-2/3 md:w-1/2 lg:w-1/2 xl:w-1/3 lg:top-[4.5rem] absolute bg-gradient-to-r from-blue-600 to-blue-400 text-slate-200 font-semibold ${open ? 'left-0' : '-left-[100%]'} p-10 shadow-lg no-underline xl:gap-6 text-base xl:text-xl z-50 font-semibold`}>
       <div>
-        <li className="duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer"><NavLink className={activeLink} to='/'>Home</NavLink></li>
+        <li className="duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer"><NavLink className={activeLink} to='/' onClick={() => setOpen(false)}>Home</NavLink></li>
 
         <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
           {
             user ?
-              <NavLink className={activeLink} to={isAdmin ? '/admin-dashboard/' : '/dashboard'}><button className=' rounded-sm'>My Profile</button></NavLink>
+              <NavLink className={activeLink} to={databaseUser.role === 'admin' ? '/admin-dashboard/profile' : '/dashboard/profile'}><button className=' rounded-sm' onClick={() => setOpen(false)}>My Profile</button></NavLink>
               :
               ""
           }
         </li>
+
         {
-          user ?
-            <li className="duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer"><NavLink className={activeLink} to='/apartments'>Apartments</NavLink></li>
+          databaseUser.role === 'member' || databaseUser.role === 'admin' ?
+            <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
+              <NavLink className={activeLink} to='/dashboard/announcements' onClick={() => setOpen(false)}>Announcements</NavLink>
+            </li>
             :
             ""
         }
+
+        {
+          databaseUser.role === 'admin' ?
+            <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
+              <NavLink className={activeLink} to='/admin-dashboard/make-announcement' onClick={() => setOpen(false)}>Make Announcement</NavLink>
+            </li>
+            :
+            ""
+        }
+
+        {
+          databaseUser.role === 'member' ?
+            <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
+              <NavLink className={activeLink} to='/dashboard/payment' onClick={() => setOpen(false)}>Make Payment</NavLink>
+            </li>
+            :
+            ""
+        }
+
+        {
+          databaseUser.role === 'member' ?
+            <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
+              <NavLink className={activeLink} to='/dashboard/payment-history' onClick={() => setOpen(false)}>Payment History</NavLink>
+            </li>
+            :
+            ""
+        }
+
+        {
+          databaseUser.role === 'admin' ?
+            <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
+              <NavLink className={activeLink} to='/admin-dashboard/payment-history' onClick={() => setOpen(false)}>Payment History</NavLink>
+            </li>
+            :
+            ""
+        }
+
+
+
       </div>
 
       <div>
@@ -112,14 +154,11 @@ const DashboardNavbar = () => {
         </div>
         <div>
           {
-            user && !isAdmin ?
+            user && !databaseUser.role === "admin" ?
               <div className="dropdown dropdown-bottom dropdown-end">
                 <div tabIndex={0} role="button" className=""><img src={user.photoURL} alt="" className="w-8 lg:w-12 h-8 lg:h-12 object-cover object-top rounded-full" /></div>
                 <ul tabIndex={0} className={`dropdown-content z-[1] menu p-2 mt-1 rounded-md w-44 ${darkMode ? "bg-gray-700" : "bg-gray-300"} shadow-lg`}>
                   <h2 className="font-bold text-center">{user.displayName}</h2>
-                  <Link to='/dashboard'><button className="btn border-none bg-blue-600 hover:bg-blue-500 btn-sm w-full mt-2 text-white rounded-sm">
-                    Dashboard
-                  </button></Link>
                   <Link><button className="btn border-none bg-red-800 hover:bg-red-600 btn-sm w-full my-1 text-white rounded-sm" onClick={handleSignOut}>
                     Logout
                   </button></Link>
@@ -131,14 +170,11 @@ const DashboardNavbar = () => {
           }
 
           {
-            isAdmin ?
+            databaseUser.role === "admin" ?
               <div className="dropdown dropdown-bottom dropdown-end">
                 <div tabIndex={0} role="button" className=""><img src={user.photoURL} alt="" className="w-8 lg:w-12 h-8 lg:h-12 object-cover object-top rounded-full" /></div>
-                <ul tabIndex={0} className={`dropdown-content z-[1] menu p-2 mt-1 rounded-md w-44 border ${darkMode ? "border-slate-400" : "border-gray-800"} shadow-lg`}>
+                <ul tabIndex={0} className={`dropdown-content z-[1] menu p-2 mt-1 rounded-md w-44 border ${darkMode ? "bg-gray-700" : "bg-gray-300"} shadow-lg`}>
                   <h2 className="font-bold text-center text-black">{user.displayName}</h2>
-                  <Link to='/admin-dashboard/'><button className="btn border-none bg-blue-600 hover:bg-blue-500 btn-sm w-full mt-2 text-white rounded-sm">
-                    Dashboard
-                  </button></Link>
                   <Link><button className="btn border-none bg-red-800 hover:bg-red-600 btn-sm w-full my-1 text-white rounded-sm" onClick={handleSignOut}>
                     Logout
                   </button></Link>

@@ -18,6 +18,8 @@ import AgreementRequests from "../pages/dashboard/agreementRequests/AgreementReq
 import MemberRoute from "./MemberRoute";
 import MemberPayment from "../pages/dashboard/memberPayment/MemberPayment";
 import MemberPaymentHistory from "../pages/dashboard/memberPaymentHistory/MemberPaymentHistory";
+import AllPaymentHistory from "../pages/dashboard/allPaymentHistory/AllPaymentHistory";
+import UpdateAnnouncement from "../pages/dashboard/updateAnnouncement/UpdateAnnouncement";
 
 const router = createBrowserRouter([
     {
@@ -49,7 +51,7 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
-                path: '/dashboard',
+                path: '/dashboard/profile',
                 element: <PrivateRouter><Profile /></PrivateRouter>
             },
             {
@@ -72,7 +74,7 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
-                path: '/admin-dashboard/',
+                path: '/admin-dashboard/profile',
                 element: <AdminRoute><Profile></Profile></AdminRoute>
             },
             {
@@ -84,12 +86,20 @@ const router = createBrowserRouter([
                 element: <AdminRoute><MakeAnnouncement></MakeAnnouncement></AdminRoute>
             },
             {
+                path: '/admin-dashboard/update-announcement/:id',
+                element: <AdminRoute><UpdateAnnouncement></UpdateAnnouncement></AdminRoute>
+            },
+            {
                 path: '/admin-dashboard/agreement-requests',
                 element: <AdminRoute><AgreementRequests></AgreementRequests></AdminRoute>
             },
             {
                 path: '/admin-dashboard/coupons',
                 element: <AdminRoute><ManageCupons></ManageCupons></AdminRoute>
+            },
+            {
+                path: '/admin-dashboard/payment-history',
+                element: <AdminRoute><AllPaymentHistory></AllPaymentHistory></AdminRoute>
             }
         ]
     }

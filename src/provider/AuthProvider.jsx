@@ -63,6 +63,7 @@ const AuthProvider = ({ children }) => {
                 axiosPublic.get(`/users/${currentUser.email}`)
                     .then(res => {
                         setDatabaseUser(res.data)
+                        setLoading(false)
                     })
                 setLoading(false)
             }
