@@ -13,13 +13,15 @@ import Announcements from "../pages/dashboard/announcements/Announcements";
 import AdminDashboard from "../pages/dashboard/adminDashboard/AdminDashboard";
 import ManageMembers from "../components/dashboard/admin/manageMembers/ManageMembers";
 import MakeAnnouncement from "../pages/dashboard/makeAnnouncement/MakeAnnouncement";
-import ManageCupons from "../pages/manageCupons/ManageCupons";
 import AgreementRequests from "../pages/dashboard/agreementRequests/AgreementRequests";
 import MemberRoute from "./MemberRoute";
 import MemberPayment from "../pages/dashboard/memberPayment/MemberPayment";
 import MemberPaymentHistory from "../pages/dashboard/memberPaymentHistory/MemberPaymentHistory";
 import AllPaymentHistory from "../pages/dashboard/allPaymentHistory/AllPaymentHistory";
 import UpdateAnnouncement from "../pages/dashboard/updateAnnouncement/UpdateAnnouncement";
+import MemberOffers from "../pages/dashboard/memberOffers/MemberOffers";
+import CreateOffers from "../pages/dashboard/createOffers/CreateOffers";
+import UpdateOffer from "../pages/dashboard/updateOffer/UpdateOffer";
 
 const router = createBrowserRouter([
     {
@@ -65,6 +67,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/payment-history',
                 element: <MemberRoute><MemberPaymentHistory></MemberPaymentHistory></MemberRoute>
+            },
+            {
+                path: '/dashboard/offers',
+                element: <MemberRoute><MemberOffers></MemberOffers></MemberRoute>
             }
         ]
     },
@@ -94,8 +100,12 @@ const router = createBrowserRouter([
                 element: <AdminRoute><AgreementRequests></AgreementRequests></AdminRoute>
             },
             {
-                path: '/admin-dashboard/coupons',
-                element: <AdminRoute><ManageCupons></ManageCupons></AdminRoute>
+                path: '/admin-dashboard/create-offers',
+                element: <AdminRoute><CreateOffers></CreateOffers></AdminRoute>
+            },
+            {
+                path: '/admin-dashboard/update-offers/:id',
+                element: <AdminRoute><UpdateOffer></UpdateOffer></AdminRoute>
             },
             {
                 path: '/admin-dashboard/payment-history',

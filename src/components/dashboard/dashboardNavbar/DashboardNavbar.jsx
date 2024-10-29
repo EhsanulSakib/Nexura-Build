@@ -71,6 +71,15 @@ const DashboardNavbar = () => {
         }
 
         {
+          databaseUser.role === 'members' ?
+            <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
+              <NavLink className={activeLink} to='/dashboard/offers' onClick={() => setOpen(false)}>Make Payment</NavLink>
+            </li>
+            :
+            ""
+        }
+
+        {
           databaseUser.role === 'member' ?
             <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
               <NavLink className={activeLink} to='/dashboard/payment-history' onClick={() => setOpen(false)}>Payment History</NavLink>
@@ -83,6 +92,33 @@ const DashboardNavbar = () => {
           databaseUser.role === 'admin' ?
             <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
               <NavLink className={activeLink} to='/admin-dashboard/payment-history' onClick={() => setOpen(false)}>Payment History</NavLink>
+            </li>
+            :
+            ""
+        }
+
+        {
+          databaseUser.role === 'admin' ?
+            <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
+              <NavLink className={activeLink} to='/admin-dashboard/manage-members' onClick={() => setOpen(false)}>Manage Members</NavLink>
+            </li>
+            :
+            ""
+        }
+
+        {
+          databaseUser.role === 'admin' ?
+            <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
+              <NavLink className={activeLink} to='/admin-dashboard/agreement-requests' onClick={() => setOpen(false)}>Agreement Requests</NavLink>
+            </li>
+            :
+            ""
+        }
+
+        {
+          databaseUser.role === 'admin' ?
+            <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
+              <NavLink className={activeLink} to='/admin-dashboard/create-offers' onClick={() => setOpen(false)}>Create Offers</NavLink>
             </li>
             :
             ""

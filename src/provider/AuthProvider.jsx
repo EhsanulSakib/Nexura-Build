@@ -62,10 +62,14 @@ const AuthProvider = ({ children }) => {
                 //     })
                 axiosPublic.get(`/users/${currentUser.email}`)
                     .then(res => {
+                        console.log(res.data)
                         setDatabaseUser(res.data)
                         setLoading(false)
                     })
-                setLoading(false)
+                    .catch(err => {
+                        console.log(err)
+                        setLoading(false)
+                    })
             }
             else {
                 // TODO: remove token (if token stored in the client side: Local storage, caching, in memory)

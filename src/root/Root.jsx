@@ -9,7 +9,7 @@ const Root = () => {
     const { darkMode } = useContext(AuthContext)
     return (
         <div className={`${darkMode ? 'bg-gray-900 text-slate-200' : 'bg-slate-200 text-gray-800'} font-raleway`}>
-            <div className={`max-w-[1840px] m-auto min-h-screen text-xs md:text-sm lg:text-base xl:text-xl`} >
+            <div className={`max-w-[2048px] m-auto min-h-screen text-xs md:text-sm lg:text-base xl:text-xl`} >
                 <Navbar></Navbar>
                 <Outlet></Outlet>
                 <ToastContainer></ToastContainer>
