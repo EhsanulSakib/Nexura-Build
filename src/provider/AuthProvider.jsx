@@ -13,6 +13,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [databaseUser, setDatabaseUser] = useState([])
     const [loading, setLoading] = useState(true)
+    const [applied, setApplied] = useState(null)
 
     const axiosPublic = useAxiosPublic()
     const GoogleProvider = new GoogleAuthProvider()
@@ -65,6 +66,13 @@ const AuthProvider = ({ children }) => {
                         console.log(res.data)
                         setDatabaseUser(res.data)
                         setLoading(false)
+                        axiosPublic.get(`/member-agreement?email=${currentUser.email}`)
+                            .then(res => {
+                                setApplied(res.data)
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            })
                     })
                     .catch(err => {
                         console.log(err)
@@ -87,7 +95,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
 
-    const userInfo = { databaseUser, loading, user, darkMode, setDarkMode, logOut, signIn, handleGoogleSignIn, handleGitHubSignIn, createUser }
+    const userInfo = { applied, setApplied, databaseUser, loading, user, darkMode, setDarkMode, logOut, signIn, handleGoogleSignIn, handleGitHubSignIn, createUser }
     return (
         <AuthContext.Provider value={userInfo}>
             {children}

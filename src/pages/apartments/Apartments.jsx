@@ -7,8 +7,10 @@ import { AuthContext } from '../../provider/AuthProvider';
 const Apartments = () => {
     const [apartments, setApartments] = useState([])
     const axiosPublic = useAxiosPublic()
+    const { applied, setApplied, databaseUser } = useContext(AuthContext)
     const [totalCount, setTotalCount] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
+
 
     useEffect(() => {
         axiosPublic.get('/apartmentsCount')
@@ -36,7 +38,7 @@ const Apartments = () => {
         <div className='min-h-screen flex flex-col justify-between mx-[2%] xl:mx-[3%] m-auto'>
             <div className='my-4 lg:my-8'>
                 <h2 className='text-center text-2xl lg:text-3xl font-bold mb-4 lg:mb-6'>Apartments</h2>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-4 gap-y-8'>
+                <div className='grid grid-cols-1 xl:grid-cols-2 gap-4 2xl:gap-16 gap-y-8'>
                     {
                         apartments?.map(apartment => <ApartmentCard key={apartment._id} apartment={apartment}></ApartmentCard>)
                     }
