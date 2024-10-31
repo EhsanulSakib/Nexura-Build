@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Navigation, Pagination, A11y, Autoplay } from 'swiper/modules';
 import Swal from "sweetalert2";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,10 +8,13 @@ import 'swiper/css/autoplay';
 import 'swiper/css/scrollbar';
 import { AuthContext } from '../../provider/AuthProvider';
 import useAxiosPublic from '../../hooks/useAxiosPublic/useAxiosPublic';
+import { toast } from 'react-toastify';
 
 const ApartmentCard = ({ apartment }) => {
+    const [apartmentData, setApartmentData] = useState(apartment)
     const { user, databaseUser, darkMode, applied, setApplied } = useContext(AuthContext)
-    const notifySuccess = () => toast.success('Applied Successfully');
+    const notifyApplied = () => toast.success('Applied Successfully');
+    const notifyCancel = () => toast.success('Canceled Successfully');
     const notifyError = error => toast.error(error);
     const axiosPublic = useAxiosPublic()
 
@@ -29,15 +32,20 @@ const ApartmentCard = ({ apartment }) => {
 
         Swal.fire({
             title: "Do you want to apply to rent this apartment?",
+            icon: "question",
             showDenyButton: true,
+            confirmButtonColor: "#3085d6",
+            denyButtonColor: "#808080",
             confirmButtonText: "Apply",
-            denyButtonText: `Cancel`
+            denyButtonText: `Back`
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 axiosPublic.post('/apply-agreement', agreement)
                     .then(res => {
-                        Swal.fire("Applied Successfully!", "", "success");
+                        console.log(res.data)
+                        notifyApplied()
+                        setApartmentData(res.data.apartmentInfo)
                         axiosPublic.get(`/member-agreement?email=${databaseUser.email}`)
                             .then(res => {
                                 setApplied(res.data)
@@ -55,24 +63,20 @@ const ApartmentCard = ({ apartment }) => {
 
     const handleCancel = () => {
         Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            title: "Cancel the agreement?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            cancelButtonColor: "#808080",
+            cancelButtonText: "Back",
+            confirmButtonText: "Cancel the Agreement!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPublic.delete(`/delete-agreement/${applied._id}`)
+                axiosPublic.delete(`/cancel-agreement/${apartment.apartment_no}`)
                     .then(res => {
-                        if (res.data.deletedCount > 0) {
-                            notifySuccess()
-                            axiosPublic.get(`/member-agreement?email=${databaseUser.email}`)
-                                .then(res => {
-                                    setApplied(res.data)
-                                })
-                        }
+                        notifyCancel()
+                        setApplied(null)
+                        setApartmentData(res.data.apartmentInfo)
                     })
                     .catch(err => {
                         notifyError(err.message)
@@ -94,7 +98,7 @@ const ApartmentCard = ({ apartment }) => {
                         <div className='flex items-center justify-center z-1 w-full h-96 2xl:h-[500px] bg-cover bg-center relative'>
                             <div className='absolute w-full h-96 2xl:h-[500px] bg-black opacity-20'>
                             </div>
-                            <img src={apartment.apartment_images[0]} alt="" className='w-full h-96 2xl:h-[500px] object-cover object-center' />
+                            <img src={apartmentData.apartment_images[0]} alt="" className='w-full h-96 2xl:h-[500px] object-cover object-center' />
                         </div>
                     </SwiperSlide>
 
@@ -102,7 +106,7 @@ const ApartmentCard = ({ apartment }) => {
                         <div className='flex items-center justify-center z-1 w-full h-96 2xl:h-[500px]  bg-cover bg-center relative'>
                             <div className='absolute w-full h-96 2xl:h-[500px] bg-black opacity-20'>
                             </div>
-                            <img src={apartment.apartment_images[1]} alt="" className='w-full h-96 2xl:h-[500px] object-cover object-center' />
+                            <img src={apartmentData.apartment_images[1]} alt="" className='w-full h-96 2xl:h-[500px] object-cover object-center' />
                         </div>
                     </SwiperSlide>
 
@@ -111,7 +115,7 @@ const ApartmentCard = ({ apartment }) => {
                         <div className='flex items-center justify-center z-1 w-full h-96 2xl:h-[500px] bg-cover bg-top relative'>
                             <div className='absolute w-full h-96 2xl:h-[500px] bg-black opacity-20'>
                             </div>
-                            <img src={apartment.apartment_images[2]} alt="" className='w-full h-96 2xl:h-[500px] object-cover object-center' />
+                            <img src={apartmentData.apartment_images[2]} alt="" className='w-full h-96 2xl:h-[500px] object-cover object-center' />
                         </div>
                     </SwiperSlide>
 
@@ -121,7 +125,7 @@ const ApartmentCard = ({ apartment }) => {
                         <div className='flex items-center justify-center z-1 w-full h-96 2xl:h-[500px]  bg-cover bg-center relative'>
                             <div className='absolute w-full h-96 2xl:h-[500px] bg-black opacity-20'>
                             </div>
-                            <img src={apartment.apartment_images[3]} alt="" className='w-full h-96 2xl:h-[500px] object-cover object-center' />
+                            <img src={apartmentData.apartment_images[3]} alt="" className='w-full h-96 2xl:h-[500px] object-cover object-center' />
                         </div>
                     </SwiperSlide>
 
@@ -129,7 +133,7 @@ const ApartmentCard = ({ apartment }) => {
                         <div className='flex items-center justify-center z-1 w-full h-96 2xl:h-[500px]  bg-cover bg-center relative'>
                             <div className='absolute w-full h-96 2xl:h-[500px] bg-black opacity-20'>
                             </div>
-                            <img src={apartment.apartment_images[4]} alt="" className='w-full h-96 2xl:h-[500px] object-cover object-center' />
+                            <img src={apartmentData.apartment_images[4]} alt="" className='w-full h-96 2xl:h-[500px] object-cover object-center' />
                         </div>
                     </SwiperSlide>
                 </Swiper>
@@ -137,24 +141,24 @@ const ApartmentCard = ({ apartment }) => {
             </figure>
             <div className="card-body">
                 <div className='flex justify-between items-center'>
-                    <h2 className="card-title text-2xl lg:text-3xl">Apartment: {apartment.apartment_no}</h2>
+                    <h2 className="card-title text-2xl lg:text-3xl">Apartment: {apartmentData.apartment_no}</h2>
                     {
-                        apartment.status === "pending" ?
+                        apartmentData.status === "pending" ?
                             <h2 className='bg-blue-500 px-2 py-1 rounded-md text-white text-lg lg:text-xl font-semibold'>Pending</h2>
                             :
                             ""
                     }
 
                     {
-                        apartment.status === "rented" ?
+                        apartmentData.status === "rented" ?
                             <h2 className='text-blue-500 text-lg lg:text-xl font-semibold'>Already Rented</h2>
                             :
                             ""
                     }
                 </div>
                 <div className='flex gap-4 text-xs md:text-sm lg:text-base xl:text-lg'>
-                    <h2 className='font-semibold'>{apartment.block_name}</h2>
-                    <h2 className='font-semibold'>Floor No: {apartment.floor_no}</h2>
+                    <h2 className='font-semibold'>{apartmentData.block_name}</h2>
+                    <h2 className='font-semibold'>Floor No: {apartmentData.floor_no}</h2>
                 </div>
                 <h2 className='text-xs md:text-sm lg:text-base xl:text-lg'>
                     <span className='font-semibold'>Facilities: </span>
@@ -162,15 +166,15 @@ const ApartmentCard = ({ apartment }) => {
                 </h2>
 
                 <div className='flex justify-between items-center pt-8'>
-                    <h2 className='text-2xl lg:text-3xl font-bold text-blue-400'>{apartment.price} BDT/month</h2>
+                    <h2 className='text-2xl lg:text-3xl font-bold text-blue-400'>{apartmentData.price} BDT/month</h2>
                     {
-                        databaseUser.role === "user" && apartment.status === "available" && !applied ?
+                        databaseUser.role === "user" && apartmentData.status === "available" && !applied ?
                             <button className="btn bg-blue-500 px-2 py-1 rounded-md hover:bg-blue-400 text-white font-bold text-lg border-none" onClick={handleAgreement}>Agreement</button>
                             :
                             ""
                     }
                     {
-                        applied?.apartment_no === apartment.apartment_no ?
+                        applied?.apartment_no === apartmentData.apartment_no ?
                             <button className="btn px-2 py-1 rounded-md bg-blue-500 hover:bg-blue-400 text-white font-bold text-lg border-none" onClick={handleCancel}>Cancel</button>
                             :
                             ""
