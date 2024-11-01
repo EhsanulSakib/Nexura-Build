@@ -20,6 +20,7 @@ const ApartmentCard = ({ apartment }) => {
 
     const handleAgreement = () => {
         const agreement = {
+            userPhoto: user.photoURL,
             userName: databaseUser.name,
             userEmail: databaseUser.email,
             agreementRequestDate: new Date().toISOString().split("T")[0],
@@ -174,7 +175,7 @@ const ApartmentCard = ({ apartment }) => {
                             ""
                     }
                     {
-                        applied?.apartment_no === apartmentData.apartment_no ?
+                        applied?.apartment_no === apartmentData.apartment_no && databaseUser.role === "user" ?
                             <button className="btn px-2 py-1 rounded-md bg-blue-500 hover:bg-blue-400 text-white font-bold text-lg border-none" onClick={handleCancel}>Cancel</button>
                             :
                             ""
