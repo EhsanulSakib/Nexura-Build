@@ -48,6 +48,7 @@ const Register = () => {
                         const userInfo = {
                             name: data.name,
                             email: data.email,
+                            createdAt: new Date().toISOString().split("T")[0],
                             role: "user"
                         }
                         axiosPublic.post('/users', userInfo)
@@ -64,8 +65,6 @@ const Register = () => {
                                     navigate('/');
                                 }
                             })
-
-
                     })
                     .catch(error => notifyError(error.message.split('(').pop().split(')')[0].split('/')[1]))
             })

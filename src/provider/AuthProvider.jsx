@@ -3,7 +3,6 @@ import app from "../firebase/firebase.config";
 import { createContext, useEffect, useState } from "react";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import useAxiosPublic from "../hooks/useAxiosPublic/useAxiosPublic";
-import axios from "axios";
 
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
@@ -66,13 +65,6 @@ const AuthProvider = ({ children }) => {
                         console.log(res.data)
                         setDatabaseUser(res.data)
                         setLoading(false)
-                        axiosPublic.get(`/member-agreement?email=${currentUser.email}`)
-                            .then(res => {
-                                setApplied(res.data)
-                            })
-                            .catch(err => {
-                                console.log(err)
-                            })
                     })
                     .catch(err => {
                         console.log(err)

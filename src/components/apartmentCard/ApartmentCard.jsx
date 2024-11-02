@@ -152,7 +152,7 @@ const ApartmentCard = ({ apartment }) => {
 
                     {
                         apartmentData.status === "rented" ?
-                            <h2 className='text-blue-500 text-lg lg:text-xl font-semibold'>Already Rented</h2>
+                            <h2 className='bg-blue-500 px-2 py-1 rounded-md text-white text-lg lg:text-xl font-semibold'>In Rent</h2>
                             :
                             ""
                     }

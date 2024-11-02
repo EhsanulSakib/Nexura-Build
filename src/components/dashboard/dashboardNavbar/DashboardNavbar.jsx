@@ -190,23 +190,7 @@ const DashboardNavbar = () => {
         </div>
         <div>
           {
-            user && !databaseUser.role === "admin" ?
-              <div className="dropdown dropdown-bottom dropdown-end">
-                <div tabIndex={0} role="button" className=""><img src={user.photoURL} alt="" className="w-8 lg:w-12 h-8 lg:h-12 object-cover object-top rounded-full" /></div>
-                <ul tabIndex={0} className={`dropdown-content z-[1] menu p-2 mt-1 rounded-md w-44 ${darkMode ? "bg-gray-700" : "bg-gray-300"} shadow-lg`}>
-                  <h2 className="font-bold text-center">{user.displayName}</h2>
-                  <Link><button className="btn border-none bg-red-800 hover:bg-red-600 btn-sm w-full my-1 text-white rounded-sm" onClick={handleSignOut}>
-                    Logout
-                  </button></Link>
-                </ul>
-              </div>
-
-              :
-              ""
-          }
-
-          {
-            databaseUser.role === "admin" ?
+            databaseUser ?
               <div className="dropdown dropdown-bottom dropdown-end">
                 <div tabIndex={0} role="button" className=""><img src={user.photoURL} alt="" className="w-8 lg:w-12 h-8 lg:h-12 object-cover object-top rounded-full" /></div>
                 <ul tabIndex={0} className={`dropdown-content z-[1] menu p-2 mt-1 rounded-md w-44 border ${darkMode ? "bg-gray-700" : "bg-gray-300"} shadow-lg`}>

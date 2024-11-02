@@ -25,6 +25,8 @@ const Profile = () => {
                         <h2 className="text-xl md:text-2xl lg:text-3xl text-blue-500 font-semibold">{user.displayName}</h2>
 
                         <h2 className='text-sm md:text-lg font-semibold'>{user.email}</h2>
+
+                        <h2 className='text-sm md:text-lg font-semibold'>Created At: {databaseUser.createdAt}</h2>
                     </div>
                 </div>
 
