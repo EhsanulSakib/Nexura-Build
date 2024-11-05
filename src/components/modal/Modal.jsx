@@ -21,12 +21,12 @@ const Modal = ({ setOpenModal }) => {
     if (input === '') {
       setError('Please enter a month and year')
     }
-    // axiosPublic.post('/create-month')
-    //   .then(res => {
-    //     if (res.data.acknowledged) {
-    //       setOpenModal(false)
-    //     }
-    //   })
+    axiosPublic.post('/create-month', { month: input })
+      .then(res => {
+        if (res.data.acknowledged) {
+          setOpenModal(false)
+        }
+      })
   }
 
   return (
