@@ -30,7 +30,7 @@ const MemberPaymentHistory = () => {
                             payments?.map(payment => <tr key={payment._id}>
                                 <td className='min-w-28'>{payment.monthOfPayment}</td>
                                 <td>{payment.payRentDate}</td>
-                                <td>{payment.price}</td>
+                                <td>{payment.price} BDT</td>
                                 <td>{payment.status}</td>
                             </tr>)
                         }
