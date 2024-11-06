@@ -13,6 +13,7 @@ const AuthProvider = ({ children }) => {
     const [databaseUser, setDatabaseUser] = useState([])
     const [loading, setLoading] = useState(true)
     const [applied, setApplied] = useState(null)
+    const [selectedMonth, setSelectedMonth] = useState('')
 
     const axiosPublic = useAxiosPublic()
     const GoogleProvider = new GoogleAuthProvider()
@@ -87,7 +88,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
 
-    const userInfo = { applied, setApplied, databaseUser, loading, user, darkMode, setDarkMode, logOut, signIn, handleGoogleSignIn, handleGitHubSignIn, createUser }
+    const userInfo = { selectedMonth, setSelectedMonth, applied, setApplied, databaseUser, loading, user, darkMode, setDarkMode, logOut, signIn, handleGoogleSignIn, handleGitHubSignIn, createUser }
     return (
         <AuthContext.Provider value={userInfo}>
             {children}

@@ -7,11 +7,10 @@ import useAxiosPublic from '../../../hooks/useAxiosPublic/useAxiosPublic';
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK)
 const MemberPayment = () => {
-    const { databaseUser, darkMode } = useContext(AuthContext);
+    const { databaseUser, darkMode, selectedMonth, setSelectedMonth } = useContext(AuthContext);
     const axiosPublic = useAxiosPublic();
     const [agreement, setAgreement] = useState(null);
     const [months, setMonths] = useState([]);
-    const [selectedMonth, setSelectedMonth] = useState(null);
 
     useEffect(() => {
         axiosPublic.get(`/member-agreement?email=${databaseUser.email}`)
@@ -40,7 +39,8 @@ const MemberPayment = () => {
                             <h2 className='font-bold'>
                                 Select Month
                             </h2>
-                            <select id="options" name="options" className={`border border-gray-300 rounded-sm px-4 py-2 ${darkMode ? 'bg-gray-800 text-slate-100' : 'bg-slate-100 text-gray-800'}`} >
+                            <select id="options" name="options" className={`border border-gray-300 rounded-sm px-4 py-2 ${darkMode ? 'bg-gray-800 text-slate-100' : 'bg-slate-100 text-gray-800'}`} onChange={e => setSelectedMonth(e.target.value)}>
+                                <option value="">Select Month</option>
                                 {
                                     months?.map((month, index) => <option key={index} value={month.month}>{month.month}</option>)
                                 }
@@ -57,7 +57,7 @@ const MemberPayment = () => {
 
                 <div className='w-full'>
                     <Elements stripe={stripePromise}>
-                        <PaymentForm selectedMonth={selectedMonth} />
+                        <PaymentForm />
                     </Elements>
                 </div>
             </div>

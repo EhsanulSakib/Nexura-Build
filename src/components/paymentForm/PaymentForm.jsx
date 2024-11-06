@@ -4,10 +4,11 @@ import useAxiosPublic from '../../hooks/useAxiosPublic/useAxiosPublic';
 import { AuthContext } from '../../provider/AuthProvider';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
 import PaymentSuccessModal from '../modal/PaymentSuccessModal';
 
-const PaymentForm = ({ selectedMonth }) => {
+const PaymentForm = () => {
+  const { selectedMonth, setSelectedMonth } = useContext(AuthContext)
+  console.log({ selectedMonth })
   const { databaseUser } = useContext(AuthContext);
   const [error, setError] = useState('');
   const stripe = useStripe();
@@ -15,15 +16,14 @@ const PaymentForm = ({ selectedMonth }) => {
   const axiosPublic = useAxiosPublic();
   const [clientSecret, setClientSecret] = useState("");
   const [agreement, setAgreement] = useState(null);
-  const [rentalPrice, setRentalPrice] = useState(null);
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
   const notifySuccess = () => toast.success('Payment Successful');
+  const notifyError = () => toast.error('Payment Failed');
 
   useEffect(() => {
     axiosPublic.get(`/member-agreement?email=${databaseUser.email}`)
       .then(res => {
         setAgreement(res.data)
-        setRentalPrice(res.data.price)
       })
   }, [])
 
@@ -32,7 +32,7 @@ const PaymentForm = ({ selectedMonth }) => {
       .then(res => {
         setClientSecret(res.data.clientSecret);
       })
-  }, [axiosPublic, agreement?.price])
+  }, [axiosPublic, selectedMonth])
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -80,12 +80,13 @@ const PaymentForm = ({ selectedMonth }) => {
         console.log('transaction id', paymentIntent.id);
 
         const paymentInfo = {
+          userName: databaseUser?.name,
           email: databaseUser?.email,
-          price: rentalPrice,
+          price: agreement?.price,
           payRentDate: new Date().toISOString().split('T')[0],
           transactionId: paymentIntent.id,
           monthOfPayment: selectedMonth,
-          status: 'pending',
+          status: 'successful',
         }
         console.log(paymentInfo);
 
@@ -93,6 +94,12 @@ const PaymentForm = ({ selectedMonth }) => {
           .then(res => {
             console.log(res.data);
             notifySuccess();
+            setModalOpen(true);
+          }
+          )
+          .catch(err => {
+            console.log(err);
+            notifyError(err.message);
           })
       }
     }
