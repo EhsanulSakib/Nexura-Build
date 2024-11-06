@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import Modal from '../../../components/modal/Modal';
 import useAxiosPublic from '../../../hooks/useAxiosPublic/useAxiosPublic';
 import { AuthContext } from '../../../provider/AuthProvider';
-import axios, { all } from 'axios';
 
 const AllPaymentHistory = () => {
   const { darkMode } = useContext(AuthContext)

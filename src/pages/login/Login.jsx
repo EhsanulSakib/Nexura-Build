@@ -19,6 +19,29 @@ const Login = () => {
     const axiosPublic = useAxiosPublic()
     const [show, setShow] = useState(false)
 
+    const demoMember = () => {
+        signIn(import.meta.env.VITE_MEMBER_EMAIL, import.meta.env.VITE_MEMBER_PASSWORD)
+            .then(result => {
+                navigate(location?.state ? location.state : '/')
+                notify()
+            }
+            )
+            .catch(error => {
+                notifyError(error.message.split('(').pop().split(')')[0].split('/')[1])
+            })
+    }
+
+    const demoAdmin = () => {
+        signIn(import.meta.env.VITE_ADMIN_EMAIL, import.meta.env.VITE_ADMIN_PASSWORD)
+            .then(result => {
+                navigate(location?.state ? location.state : '/')
+                notify()
+            }
+            )
+            .catch(error => {
+                notifyError(error.message.split('(').pop().split(')')[0].split('/')[1])
+            })
+    }
     const onSubmit = (data) => {
         const { email, password } = data;
 
@@ -67,8 +90,8 @@ const Login = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center my-12">
-            <div className="my-8 py-4 flex gap-4 rounded-xl flex-col items-center justify-center w-11/12 md:w-1/2 md:py-8 lg:py-12 shadow-xl z-10 backdrop-blur-lg bg-gradient-to-r from-[rgba(255,255,255,0.9)] to-[rgba(255,255,255,0.6)] text-black">
-                <h2 className="text-2xl font-semibold">Please Login</h2>
+            <div className="my-8 py-4 flex gap-4 rounded-xl flex-col items-center justify-center w-4/5 md:w-2/3 2xl:w-1/3 md:py-8 lg:py-12 shadow-xl z-10 backdrop-blur-lg bg-gradient-to-r from-[rgba(255,255,255,0.9)] to-[rgba(255,255,255,0.6)] text-black">
+                <h2 className="text-2xl font-semibold text-blue-500">Login</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="w-11/12 md:w-3/4">
                     <div className="form-control">
                         <label className="label">
@@ -93,12 +116,22 @@ const Login = () => {
                         </label>
                     </div>
                     <div className="form-control mt-6">
-                        <button className="btn bg-blue-400 hover:bg-blue-500 border-none text-white text-lg font-bold">Login</button>
+                        <button className="btn bg-blue-400 hover:bg-blue-500 border-none text-white rounded-sm text-lg font-bold">Login</button>
                     </div>
                 </form>
                 <div className="flex gap-4 my-2">
                     <img src={google} alt="google logo" onClick={handleGoogleLogin} className="w-10 cursor-pointer" />
                     <img src={github} alt="google logo" onClick={handleGithubLogin} className="w-10 cursor-pointer" />
+                </div>
+
+                <div className="w-4/5 flex flex-col lg:flex-row gap-2">
+                    <button className="border-blue-500 px-4 py-2 text-blue-500 border rounded-sm duration-300 hover:bg-blue-500 hover:text-white w-full font-bold" onClick={demoMember}>
+                        Demo Member
+                    </button>
+
+                    <button className="border-green-500 px-4 py-2 border rounded-sm duration-300 text-green-500 hover:bg-green-500 hover:text-white w-full font-bold" onClick={demoAdmin}>
+                        Demo Admin
+                    </button>
                 </div>
                 <hr className="w-11/12 border border-stone-400 border-dashed" />
                 <div>
