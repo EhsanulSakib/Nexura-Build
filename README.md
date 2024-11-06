@@ -6,11 +6,6 @@ Welcome to the Nexura Building Management System. This project aims to provide a
 
 [Visit Nexura Building Management Website](https://nexura-build.web.app/)
 
-## Admin Credentials
-
-- **Username**: admin@gmail.com
-- **Password**: Admin1
-
 ## Features
 
 1. **Responsive Design**: The website is fully responsive, ensuring a seamless experience on mobile, tablet, and desktop views.
