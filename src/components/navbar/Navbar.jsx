@@ -7,7 +7,7 @@ import logo from '/nexura-logo.png'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from "../../provider/AuthProvider";
-import { MdDarkMode, MdLightMode, MdOutlineLogout } from "react-icons/md";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
