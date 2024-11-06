@@ -25,7 +25,7 @@ const AnnouncementCard = ({ announcement, deleteAnnouncement }) => {
                             ""
                     }
                     {
-                        isAdmin ?
+                        isAdmin || databaseUser.role === 'demo-admin' ?
                             <button className='bg-blue-500 text-white py-2 px-3 rounded-md' onClick={() => route(`/admin-dashboard/update-announcement/${announcement._id}`)}>
                                 <MdOutlineUpdate />
                             </button>

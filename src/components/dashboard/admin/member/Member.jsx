@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaUserAltSlash } from "react-icons/fa";
 import Swal from 'sweetalert2';
 import useAxiosPublic from '../../../../hooks/useAxiosPublic/useAxiosPublic';
 import { toast } from 'react-toastify';
+import { AuthContext } from '../../../../provider/AuthProvider';
 
 const Member = ({ member }) => {
+    const { databaseUser } = useContext(AuthContext)
     const [memberDetails, setMemberDetails] = useState(member)
     const axiosPublic = useAxiosPublic()
     const notifySuccess = () => toast.success('Agreement Cancelled');
@@ -42,9 +44,14 @@ const Member = ({ member }) => {
                     memberDetails.role === 'user' || memberDetails.role === 'admin' ?
                         ""
                         :
-                        <button className='btn btn-sm bg-red-500 text-xl text-white border-none hover:bg-red-800' onClick={() => handleRemoveRole()}>
-                            <FaUserAltSlash />
-                        </button>
+                        (
+                            databaseUser.role === 'admin' ?
+                                <button className='btn btn-sm bg-red-500 text-xl text-white border-none hover:bg-red-800' onClick={() => handleRemoveRole()}>
+                                    <FaUserAltSlash />
+                                </button>
+                                :
+                                <h2 className='text-red-500 font-bold text-center'>No Access</h2>
+                        )
                 }
 
             </td>

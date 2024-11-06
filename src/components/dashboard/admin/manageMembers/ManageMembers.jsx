@@ -37,7 +37,7 @@ const ManageMembers = () => {
             <div className="overflow-x-auto">
                 <table className="table">
                     <thead>
-                        <tr>
+                        <tr className='text-blue-500'>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>

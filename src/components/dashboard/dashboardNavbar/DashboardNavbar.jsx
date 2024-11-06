@@ -37,14 +37,14 @@ const DashboardNavbar = () => {
         <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
           {
             user ?
-              <NavLink className={activeLink} to={databaseUser.role === 'admin' ? '/admin-dashboard/profile' : '/dashboard/profile'}><button className=' rounded-sm' onClick={() => setOpen(false)}>My Profile</button></NavLink>
+              <NavLink className={activeLink} to={(databaseUser.role === 'admin' || databaseUser.role === 'demo-admin') ? '/admin-dashboard/profile' : '/dashboard/profile'}><button className=' rounded-sm' onClick={() => setOpen(false)}>My Profile</button></NavLink>
               :
               ""
           }
         </li>
 
         {
-          databaseUser.role === 'member' || databaseUser.role === 'admin' ?
+          databaseUser.role === 'member' || databaseUser.role === 'admin' || databaseUser.role === 'demo-admin' ?
             <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
               <NavLink className={activeLink} to='/dashboard/announcements' onClick={() => setOpen(false)}>Announcements</NavLink>
             </li>
@@ -53,7 +53,7 @@ const DashboardNavbar = () => {
         }
 
         {
-          databaseUser.role === 'admin' ?
+          databaseUser.role === 'admin' || databaseUser.role === 'demo-admin' ?
             <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
               <NavLink className={activeLink} to='/admin-dashboard/make-announcement' onClick={() => setOpen(false)}>Make Announcement</NavLink>
             </li>
@@ -89,7 +89,7 @@ const DashboardNavbar = () => {
         }
 
         {
-          databaseUser.role === 'admin' ?
+          databaseUser.role === 'admin' || databaseUser.role === 'demo-admin' ?
             <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
               <NavLink className={activeLink} to='/admin-dashboard/payment-history' onClick={() => setOpen(false)}>Payment History</NavLink>
             </li>
@@ -98,7 +98,7 @@ const DashboardNavbar = () => {
         }
 
         {
-          databaseUser.role === 'admin' ?
+          databaseUser.role === 'admin' || databaseUser.role === 'demo-admin' ?
             <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
               <NavLink className={activeLink} to='/admin-dashboard/manage-members' onClick={() => setOpen(false)}>Manage Members</NavLink>
             </li>
@@ -107,7 +107,7 @@ const DashboardNavbar = () => {
         }
 
         {
-          databaseUser.role === 'admin' ?
+          databaseUser.role === 'admin' || databaseUser.role === 'demo-admin' ?
             <li className={`duration-300 ease-linear border-b mt-4 p-2 border-slate-300 hover:bg-slate-300 hover:text-gray-800 cursor-pointer`}>
               <NavLink className={activeLink} to='/admin-dashboard/agreement-requests' onClick={() => setOpen(false)}>Agreement Requests</NavLink>
             </li>
@@ -152,13 +152,13 @@ const DashboardNavbar = () => {
   return (
     <nav className="flex items-center justify-between m-auto text-xl font-medium font-raleway py-1 lg:py-2 relative">
       <div className="flex items-center ml-2">
-        <div onClick={() => setOpen(!open)}>
+        <div onClick={() => setOpen(!open)} className="cursor-pointer">
           {
             open == true ? <IoMdClose className="text-2xl " /> : <RiMenu2Line className="text-2xl " />
           }
         </div>
 
-        <div className="logo flex text-base items-center">
+        <div className="logo flex text-base items-center cursor-pointer" onClick={() => navigate('/')}>
           <img src={logo} alt="" className="w-12 lg:w-16 pl-2" />
           <h2 className="text-blue-500 text-xl lg:text-2xl font-extrabold">Nexura Building</h2>
         </div>

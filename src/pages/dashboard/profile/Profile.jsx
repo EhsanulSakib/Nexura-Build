@@ -43,7 +43,7 @@ const Profile = () => {
                 }
 
                 {
-                    databaseUser.role === "admin" ?
+                    databaseUser.role === "admin" || databaseUser.role === "demo-admin" ?
                         <AdminProfile />
                         :
                         ""

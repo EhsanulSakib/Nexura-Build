@@ -93,7 +93,7 @@ const ApartmentCard = ({ apartment }) => {
                     modules={[A11y, Autoplay]}
                     spaceBetween={100}
                     slidesPerView={1}
-                    autoplay={{ delay: 2000 }}
+                    autoplay={{ delay: 5000 }}
                 >
                     <SwiperSlide>
                         <div className='flex items-center justify-center z-1 w-full h-96 2xl:h-[500px] bg-cover bg-center relative'>
@@ -145,14 +145,14 @@ const ApartmentCard = ({ apartment }) => {
                     <h2 className="card-title text-2xl lg:text-3xl">Apartment: {apartmentData.apartment_no}</h2>
                     {
                         apartmentData.status === "pending" ?
-                            <h2 className='bg-blue-500 px-2 py-1 rounded-md text-white text-lg lg:text-xl font-semibold'>Pending</h2>
+                            <h2 className='border-blue-500 border text-blue-500 px-2 py-1 rounded-sm text-lg lg:text-xl font-semibold'>Pending</h2>
                             :
                             ""
                     }
 
                     {
                         apartmentData.status === "rented" ?
-                            <h2 className='bg-blue-500 px-2 py-1 rounded-md text-white text-lg lg:text-xl font-semibold'>In Rent</h2>
+                            <h2 className='border-blue-500 border rounded-sm text-blue-500 px-2 py-1 text-lg lg:text-xl font-semibold'>In Rent</h2>
                             :
                             ""
                     }

@@ -30,16 +30,16 @@ const Navbar = () => {
 
     const links = <>
         <ul className={`xl:flex flex-row gap-2 xl:gap-6 duration-300 top-[3rem] lg:top-[4rem] absolute ${darkMode ? 'bg-gray-900' : 'bg-slate-200'} xl:static ${open ? 'left-0' : '-left-60'} p-10 xl:p-0 shadow-lg xl:shadow-none no-underline xl:gap-6 text-base xl:text-xl z-50 font-semibold`}>
-            <li className="pb-1 xl:pb-0 hover:border-b-2 cursor-pointer"><NavLink className={activeLink} to='/'>Home</NavLink></li>
+            <li className="pb-1 xl:pb-0 hover:text-blue-400 duration-300 cursor-pointer"><NavLink className={activeLink} to='/'>Home</NavLink></li>
             {
-                user ?
-                    <li className="pb-1 xl:pb-0 hover:border-b-2 cursor-pointer"><NavLink className={activeLink} to='/apartments'>Apartments</NavLink></li>
+                databaseUser && user ?
+                    <li className="pb-1 xl:pb-0 hover:text-blue-400 duration-300 cursor-pointer"><NavLink className={activeLink} to='/apartments'>Apartments</NavLink></li>
                     :
                     ""
             }
 
             {
-                user ?
+                databaseUser && user ?
                     <li className="mt-8 xl:mt-0 rounded-md xl:hidden focus:border-b-2" onClick={handleSignOut}>Sign Out</li>
                     :
                     <li className="mt-8 xl:mt-0 rounded-md xl:hidden">
@@ -48,7 +48,7 @@ const Navbar = () => {
             }
 
             {
-                user ?
+                databaseUser && user ?
                     ""
                     :
                     <li className="xl:hidden"><NavLink className={'focus:border-b-2 '} to='/register'>Register</NavLink></li>
@@ -66,13 +66,13 @@ const Navbar = () => {
                     }
                 </div>
 
-                <div className="logo flex text-base xl:hidden items-center">
+                <div className="logo flex text-base xl:hidden items-center cursor-pointer" onClick={() => navigate('/')}>
                     <img src={logo} alt="" className="w-12 pl-2" />
                     <h2 className="text-blue-600 text-xl font-extrabold">Nexura Building</h2>
                 </div>
             </div>
 
-            <div className="logo hidden xl:flex items-center ">
+            <div className="logo hidden xl:flex items-center cursor-pointer" onClick={() => navigate('/')}>
                 <img src={logo} alt="" className="w-16 pl-2" />
                 <h2 className="text-blue-600 text-3xl font-extrabold">Nexura Building</h2>
             </div>
@@ -102,12 +102,12 @@ const Navbar = () => {
                     </div>
                     <div>
                         {
-                            user ?
+                            databaseUser && user ?
                                 <div className="dropdown dropdown-bottom dropdown-end">
                                     <div tabIndex={0} role="button" className=""><img src={user.photoURL} alt="" className="w-8 lg:w-12 h-8 lg:h-12 object-cover object-top rounded-full" /></div>
                                     <ul tabIndex={0} className={`dropdown-content z-[1] menu p-2 mt-1 rounded-md w-44 ${darkMode ? "bg-gray-700" : "bg-gray-300"} shadow-lg`}>
                                         <h2 className="font-bold text-center">{user.displayName}</h2>
-                                        <Link to={databaseUser.role === 'admin' ? '/admin-dashboard/profile' : '/dashboard/profile'}><button className="btn border-none bg-blue-600 hover:bg-blue-500 btn-sm w-full mt-2 text-white rounded-sm">
+                                        <Link to={(databaseUser.role === 'admin' || databaseUser.role === 'demo-admin') ? '/admin-dashboard/profile' : '/dashboard/profile'}><button className="btn border-none bg-blue-600 hover:bg-blue-500 btn-sm w-full mt-2 text-white rounded-sm">
                                             Dashboard
                                         </button></Link>
                                         <Link><button className="btn border-none bg-red-800 hover:bg-red-600 btn-sm w-full my-1 text-white rounded-sm" onClick={handleSignOut}>
@@ -123,7 +123,7 @@ const Navbar = () => {
 
                     <div className="hidden lg:flex">
                         {
-                            user ?
+                            databaseUser && user ?
                                 ""
                                 :
                                 <button className="btn rounded-full bg-blue-600 hover-bg-blue-500text-sm lg:text-base border-none text-white font-bold">

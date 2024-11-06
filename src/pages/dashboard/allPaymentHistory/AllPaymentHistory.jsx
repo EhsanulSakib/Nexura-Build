@@ -77,7 +77,7 @@ const AllPaymentHistory = () => {
       <div className='overflow-x-auto mt-4'>
         <table className="table">
           <thead>
-            <tr className='text-blue-500 text-lg'>
+            <tr className='text-blue-500'>
               <th>User</th>
               <th>User Email</th>
               <th>Month</th>

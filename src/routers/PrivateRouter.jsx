@@ -12,7 +12,7 @@ const PrivateRouter = ({ children }) => {
         </div>
     }
 
-    if (databaseUser.role === "admin" || databaseUser.role === "member" || databaseUser.role === "user") {
+    if (databaseUser.role === "admin" || databaseUser.role === "member" || databaseUser.role === "user" || databaseUser.role === "demo-admin") {
         return children
     }
 

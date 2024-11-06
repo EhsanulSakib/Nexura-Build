@@ -21,14 +21,14 @@ const Banner = () => {
                 >
                     <SwiperSlide>
                         <div style={{ backgroundImage: `url("https://i.ibb.co/ydxkQ5r/48219.jpg")` }} className='flex items-center justify-center z-1 w-full h-72 md:h-96 lg:h-[600px] xl:h-[750px] bg-cover bg-center relative'>
-                            <div className='absolute w-full h-full bg-black opacity-60'>
+                            <div className='absolute w-full h-full bg-gradient-to-r from-black/70 to-black/10'>
                             </div>
                         </div>
                     </SwiperSlide>
 
                     <SwiperSlide>
                         <div style={{ backgroundImage: `url("https://i.ibb.co/5Y0HbY3/12323.jpg")` }} className='flex items-center justify-center z-1 w-full h-72 md:h-96 lg:h-[600px] xl:h-[750px] bg-cover bg-center relative'>
-                            <div className='absolute w-full h-full bg-black opacity-60'>
+                            <div className='absolute w-full h-full bg-gradient-to-r from-black/80 to-black/10'>
                             </div>
                         </div>
                     </SwiperSlide>
@@ -36,7 +36,7 @@ const Banner = () => {
 
                     <SwiperSlide>
                         <div style={{ backgroundImage: `url("https://i.ibb.co/MN5LHTJ/2150164706.jpg")` }} className='flex items-center justify-center z-1 w-full h-72 md:h-96 lg:h-[600px] xl:h-[750px] bg-cover bg-top relative'>
-                            <div className='absolute w-full h-full bg-black opacity-60'>
+                            <div className='absolute w-full h-full bg-gradient-to-r from-black/70 to-black/10'>
                             </div>
 
                         </div>
@@ -45,7 +45,7 @@ const Banner = () => {
 
                     <SwiperSlide>
                         <div style={{ backgroundImage: `url("https://i.ibb.co/0tpkyMC/152143.jpg")` }} className='flex items-center justify-center z-1 w-full h-72 md:h-96 lg:h-[600px] xl:h-[750px] bg-cover bg-center relative'>
-                            <div className='absolute w-full h-full bg-black opacity-60'>
+                            <div className='absolute w-full h-full bg-gradient-to-r from-black/70 to-black/10'>
                             </div>
 
                         </div>
